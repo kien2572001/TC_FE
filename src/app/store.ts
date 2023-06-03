@@ -5,7 +5,7 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-    searchValue: '123',
+    searchValue: '',
 };
 
 const searchSlice = createSlice({
