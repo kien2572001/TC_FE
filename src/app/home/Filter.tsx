@@ -1,12 +1,12 @@
 import React from "react";
 
-type FoodFilterProps = {
-  onChange: (value: string) => void;
+type FilterProps = {
+  onFilterChange: (value: string) => void;
 };
 
-const FoodFilter = ({ onChange }: FoodFilterProps) => {
-  const handleFilterChange = (value: string) => {
-    onChange(value);
+const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
+  const handleOptionChange = (value: string) => {
+    onFilterChange(value);
   };
 
   return (
@@ -15,34 +15,34 @@ const FoodFilter = ({ onChange }: FoodFilterProps) => {
         type="button"
         value={"All"}
         className="bg-white p-[10px] w-[50px] h-[40px]"
-        onClick={() => handleFilterChange("All")}
+        onClick={() => handleOptionChange("All")}
       />
       <input
         type="button"
         value={"Foods"}
         className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleFilterChange("Foods")}
+        onClick={() => handleOptionChange("Foods")}
       />
       <input
         type="button"
-        value={"Drinks"}
+        value={"Food"}
         className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleFilterChange("Drinks")}
+        onClick={() => handleOptionChange("Drinks")}
       />
       <input
         type="button"
         value={"Rating"}
         className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleFilterChange("Rating")}
+        onClick={() => handleOptionChange("Rating")}
       />
       <input
         type="button"
         value={"Cheap"}
         className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleFilterChange("Cheap")}
+        onClick={() => handleOptionChange("Cheap")}
       />
     </div>
   );
 };
 
-export default FoodFilter;
+export default Filter;

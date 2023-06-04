@@ -26,12 +26,12 @@ const RestaurantList = () => {
       {restaurants.map((restaurant) => (
         <div
           key={restaurant.id}
-          className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px]"
+          className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"
         >
           <div className="flex m-auto w-[150px] h-[170px]">
             <img
               className="w-full h-full"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Barbieri_-_ViaSophia25668.jpg/1200px-Barbieri_-_ViaSophia25668.jpg"
+              src={restaurant.photoUrl}
               alt="restaurant img"
             />
           </div>
