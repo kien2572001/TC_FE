@@ -21,8 +21,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Using Docker
 
 1. [Install Docker](https://docs.docker.com/get-docker/) on your machine.
-1. Build your container: `docker build -t nextjs-docker .`.
-1. Run your container: `docker run -p 3000:3000 nextjs-docker`.
+1. Build your container: `docker build -t tc_fe_app .`.
+1. Run your container: `docker run -p 3000:3000 tc_fe_app`.
 
 ## Learn More
 
