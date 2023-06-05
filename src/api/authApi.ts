@@ -1,6 +1,7 @@
 import { setCookie } from "cookies-next";
 import { LoginUser, RegisterUser } from "@/models/auth";
 import axios from "axios";
+import { json } from "stream/consumers";
 
 export const authApi = {
   register: async (registerUser: RegisterUser) => {
@@ -10,7 +11,7 @@ export const authApi = {
         registerUser
       );
       return res.data;
-    } catch (err) {}
+    } catch (err) { }
     return 0;
   },
   login: async (userLogin: LoginUser) => {
@@ -22,11 +23,13 @@ export const authApi = {
         userLogin
       );
       if (res && res.data) {
+        localStorage.setItem("userName", res.data.user.name)
+        localStorage.setItem("userAvatar", res.data.user.avatar)
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
       }
       return 1;
-    } catch (error) {}
+    } catch (error) { }
     return 0;
   },
   refreshToken: async () => {

@@ -1,11 +1,19 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, setSearchValue } from '../store';
+import { useRouter } from "next/navigation";
+
 
 export default function Header() {
 
     const dispatch = useDispatch()
+    const router = useRouter()
+
+    const handleLogout = () => {
+        localStorage.clear();
+        router.push('/login');
+    }
 
     const handleSearch = () => {
         let searchValue = document.getElementById('search-bar') as any;
@@ -18,7 +26,6 @@ export default function Header() {
             dispatch(setSearchValue(searchValue.value));
         }
     };
-
 
     return (
         <div className="container">
@@ -50,10 +57,10 @@ export default function Header() {
                                         </a>
                                     </li>
                                     <li><a>設定</a></li>
-                                    <li><a>ログアウト</a></li>
+                                    <li onClick={handleLogout}><a>ログアウト</a></li>
                                 </ul>
                             </div>
-                            <span style={{ marginLeft: '15px' }}>Ngo Ba Kha</span>
+                            <span style={{ marginLeft: '15px' }}>{localStorage.getItem('userName')}</span>
                         </div>
                     ) :
                         (
