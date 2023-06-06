@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import homeApi from "../../api/homeApi";
 import { Restaurant } from "../../models/home";
 
-const RestaurantList = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
+  const [restaurants, setRestaurants] = useState<Restaurant[]>(restaurantsData);
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const response = await homeApi.getRestaurantsAll();
-        setRestaurants(response);
-      } catch (error) {
-        console.error("Failed to fetch restaurants:", error);
-      }
-    };
-    fetchRestaurants();
-  }, []);
+  // useEffect(() => {
+  //   const fetchRestaurants = async () => {
+  //     try {
+  //       const response = await homeApi.getRestaurantsAll();
+  //       setRestaurants(response);
+  //     } catch (error) {
+  //       console.error("Failed to fetch restaurants:", error);
+  //     }
+  //   };
+  //   fetchRestaurants();
+  // }, []);
 
   if (!restaurants || restaurants.length === 0) {
     return <p>No restaurants found.</p>;
