@@ -4,6 +4,7 @@ import RestaurantList from "./RestaurantList";
 import FoodList from "./FoodList";
 import { Restaurant, Food } from "@/models/home";
 import { SearchOutlined } from "@ant-design/icons";
+import Filter from "./Filter";
 
 type Props = {};
 
@@ -96,32 +97,20 @@ const Home = (props: Props) => {
 
   return (
     <div>
-      <div className="flex-1 gap-2 relative">
-        <div className="form-control absolute top-[-60px] left-[700px]">
-          <input
-            type="text"
-            placeholder="検索.."
-            className="input input-bordered w-24 md:w-auto"
-            id="search-bar"
-            value={filterValue}
-            onChange={(e) => handleFilterChange(e.target.value)}
-          />
-        </div>
-        {/* <button
-          className="btn-search btn btn-ghost btn-circle"
-          onClick={() => handleSearch()}
-        >
-          <SearchOutlined />
-        </button> */}
-      </div>
       <div className="flex max-w-[1500px] m-auto p-[10px] flex-col border-[1px] border-black border-solid max-h-[400px]">
-        <h1>Restaurant</h1>
+        <h1>レストラン</h1>
         <RestaurantList restaurantsData={restaurants} />
       </div>
       <div className="flex max-w-[1500px] m-auto p-[10px] flex-col border-[1px] border-black border-solid">
         <div className="flex space-x-5">
-          <h1>Recommended Foods</h1>
+          <h1>おすすめ料理</h1>
+          <Filter
+            onFilterChange={function (value: string): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
         </div>
+
         <FoodList foodsData={foods} />
       </div>
     </div>
