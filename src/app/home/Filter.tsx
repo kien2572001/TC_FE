@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Space } from "antd";
 
 type FilterProps = {
   onFilterChange: (value: string) => void;
@@ -10,38 +11,13 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="flex space-x-4 m-auto">
-      <input
-        type="button"
-        value={"All"}
-        className="bg-white p-[10px] w-[50px] h-[40px]"
-        onClick={() => handleOptionChange("All")}
-      />
-      <input
-        type="button"
-        value={"Foods"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Foods")}
-      />
-      <input
-        type="button"
-        value={"Food"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Drinks")}
-      />
-      <input
-        type="button"
-        value={"Rating"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Rating")}
-      />
-      <input
-        type="button"
-        value={"Cheap"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Cheap")}
-      />
-    </div>
+    <Space wrap>
+      <Button size="large">All</Button>
+      <Button size="large">Foods</Button>
+      <Button size="large">Drinks</Button>
+      <Button size="large">Rating</Button>
+      <Button size="large">Cheap</Button>
+    </Space>
   );
 };
 
