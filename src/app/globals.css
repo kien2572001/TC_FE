@@ -29,15 +29,24 @@
 }
 
 .logo {
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .search-bar {
   text-align: center;
-  width: 30%;
+  width: 20%;
   margin-left: 650px;
+  max-width: 250px;
 }
 
 .dropdown-menu {
-  margin-left: 500px;
+  margin-left: 650px;
+}
+
+.container-footer {
+  text-align: center;
+}
+
+.margin-footer {
+  margin-left: 8px;
 }
