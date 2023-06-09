@@ -23,7 +23,13 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const publicRoutes = ["/register", "/login", "/home"];
+  const publicRoutes = ["/register", "/login", "/home", "/restaurant/register","/restaurant/add-food"];
+  const routesWithoutHeaderFooter = [
+    "/login",
+    "/register",
+    "/restaurant/register",
+    "/restaurant/add-food"
+  ];
 
   useEffect(() => {
     if (
@@ -37,12 +43,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider store={store}>
-          <Header />
-          {children}
-          <Footer />
+          {!routesWithoutHeaderFooter.includes(pathname) ? (
+            <>
+              <Header />
+              {children}
+              <Footer />
+            </>
+          ) : (
+            children
+          )}
         </Provider>
       </body>
     </html>
   );
 }
-
