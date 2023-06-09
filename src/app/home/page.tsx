@@ -16,6 +16,7 @@ const restaurantsData: any = [
     name: "Restaurant 1",
     photoUrl: restaurantPhoto,
     active_time: "10:00 - 22:00",
+    rating: 2,
     is_draft: false,
   },
   {
@@ -23,6 +24,7 @@ const restaurantsData: any = [
     name: "Restaurant 2",
     photoUrl: restaurantPhoto,
     active_time: "10:00 - 22:00",
+    rating: 5,
     is_draft: false,
   },
   {
@@ -30,6 +32,7 @@ const restaurantsData: any = [
     name: "Restaurant 3",
     photoUrl: restaurantPhoto,
     active_time: "10:00 - 22:00",
+    rating: 4.5,
     is_draft: false,
   },
   {
@@ -37,6 +40,7 @@ const restaurantsData: any = [
     name: "Restaurant 4",
     photoUrl: restaurantPhoto,
     active_time: "10:00 - 22:00",
+    rating: 3,
     is_draft: false,
   },
 ];
@@ -51,6 +55,8 @@ const foodsData: any = [
     photoUrl: foodPhoto,
     active_time: "10:00 - 22:00",
     is_draft: false,
+    rating: 4,
+    restaurantName: "Restaurant 1",
   },
   {
     id: 2,
@@ -58,6 +64,8 @@ const foodsData: any = [
     photoUrl: foodPhoto,
     active_time: "10:00 - 22:00",
     is_draft: false,
+    rating: 3,
+    restaurantName: "Restaurant 2",
   },
 ];
 

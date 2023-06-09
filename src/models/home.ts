@@ -1,4 +1,5 @@
 export interface Restaurant {
+    rating: number | undefined;
     id: number;
     name: string;
     address: string;
@@ -8,6 +9,8 @@ export interface Restaurant {
 }
 
 export interface Food {
+    rating: number | undefined;
+    restaurantName: string;
     id: number;
     name: string;
     price: number;

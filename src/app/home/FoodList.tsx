@@ -4,6 +4,7 @@ import homeApi from "../../api/homeApi";
 import Filter from "./Filter";
 import { Food } from "@/models/home";
 import { Card } from "antd";
+import { Rate } from "antd";
 
 const { Meta } = Card;
 
@@ -48,7 +49,10 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
           cover={<img alt="food img" src={food.photoUrl} />}
           bordered
         >
-          <Meta title={food.name} description="rating" />
+          <Meta title={food.name} description="" />
+          <span>{food.restaurantName}</span>
+          <Rate allowHalf disabled defaultValue={food.rating} style={{marginRight: "10px"}}/>
+          ({food.rating})
         </Card>
       ))}
     </div>

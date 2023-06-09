@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import homeApi from "../../api/homeApi";
 import { Restaurant } from "../../models/home";
 import { Card } from "antd";
+import { StarFilled } from "@ant-design/icons";
+import { Rate } from "antd";
 
 const { Meta } = Card;
 
@@ -19,6 +21,16 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
   //   };
   //   fetchRestaurants();
   // }, []);
+  const displayRating = (rating: number) => {
+    const starCount = Math.round(rating); // Round the rating to the nearest integer
+    const stars = [];
+
+    for (let i = 0; i < starCount; i++) {
+      stars.push(<StarFilled key={i} style={{ color: "#ffc107" }} />);
+    }
+
+    return stars;
+  };
 
   if (!restaurants || restaurants.length === 0) {
     return <p>No restaurants found.</p>;
@@ -50,7 +62,9 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
           cover={<img alt="restaurant img" src={restaurant.photoUrl} />}
           bordered
         >
-          <Meta title={restaurant.name} description="rating" />
+          <Meta title={restaurant.name} description="" />
+          <Rate allowHalf disabled defaultValue={restaurant.rating} style={{marginRight: "10px"}}/>
+          ({restaurant.rating})
         </Card>
       ))}
     </div>
