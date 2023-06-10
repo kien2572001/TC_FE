@@ -14,9 +14,8 @@ import {
 } from "antd";
 import UploadImage from "../UploadImage";
 import { Store } from "antd/lib/form/interface";
-import dayjs from "dayjs";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 type LayoutType = Parameters<typeof Form>[0]["layout"];
 
 const { TextArea } = Input;
@@ -34,6 +33,8 @@ const AddFoodPage: React.FC<Props> = () => {
   const [isFood, setIsFood] = useState<boolean>(false);
 
   const [restaurantList, setRestaurantList] = useState<any[]>([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     fetchRestaurantList();
@@ -89,27 +90,24 @@ const AddFoodPage: React.FC<Props> = () => {
       await form.validateFields();
       const response = await axios.post("http://localhost:3008/api/foods/", {
         name: foodName,
-        price: foodPrice,
+        price: Number.parseInt(foodPrice),
         restaurantId: restaurantId,
         photoUrl: image,
         isFood: isFood,
+        isDraft: false,
       });
-      if (response?.status === 200) {
+      if (response?.data.message === "Food created successfully") {
         successMessage();
+        router.push("/restaurant/1");
       }
     } catch (error) {
       errorMessage();
     }
   };
 
-  const foodPriceValidation = (rule: any, value: any) => {
-    if (!value) {
-      return Promise.reject("値段を入力してください");
-    } else if (value < 0) {
-      return Promise.reject("値段は0以上の数字を入力してください");
-    }
-    return Promise.resolve();
-  };
+  useEffect(() => {
+    console.log(foodPrice);
+  }, [foodPrice]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-blue-200">
@@ -152,7 +150,6 @@ const AddFoodPage: React.FC<Props> = () => {
           </Form.Item>
           <Form.Item
             label={<span className="font-bold text-lg">料理価格</span>}
-            name="foodPrice"
             // rules={[
             //   {
             //     required: true,
@@ -166,12 +163,12 @@ const AddFoodPage: React.FC<Props> = () => {
             // ]}
             className="font-bold flex justify-between items-center"
           >
-            <InputNumber
-  type="number"
-  value={foodPrice}
-  onChange={(value) => setFoodPrice(value ? value.toString() : "")}
-  className="w-[200px]"
-/>
+            <Input
+              type="number"
+              value={foodPrice}
+              onChange={(e) => setFoodPrice(e.target.value)}
+              className="w-[200px]"
+            />
             <Radio.Group
               value={isFood}
               onChange={(e) => setIsFood(e.target.value)}
@@ -220,7 +217,7 @@ const AddFoodPage: React.FC<Props> = () => {
             <UploadImage image={image} setImage={setImage} />
           </Form.Item>
           <Form.Item className="flex justify-center">
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" onClick={handleCreateFood}>
               リクエスト
             </Button>
           </Form.Item>

@@ -23,12 +23,12 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const publicRoutes = ["/register", "/login", "/home", "/restaurant/register","/restaurant/add-food"];
+  const publicRoutes = ["/register", "/login", "/home", "/restaurant/register","/restaurant/add-food","/restaurant/1"];
   const routesWithoutHeaderFooter = [
     "/login",
     "/register",
     "/restaurant/register",
-    "/restaurant/add-food"
+    "/restaurant/add-food",
   ];
 
   useEffect(() => {
