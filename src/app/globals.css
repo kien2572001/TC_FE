@@ -29,15 +29,38 @@
 }
 
 .logo {
-  margin-left: 20px;
+  margin-left: 30px;
+
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 24px;
+  /* Adjust the font size as needed */
+  font-weight: bold;
+  color: #333;
+  /* Adjust the color as needed */
+
 }
 
 .search-bar {
   text-align: center;
-  width: 30%;
+  width: 20%;
   margin-left: 650px;
+  max-width: 300px;
 }
 
 .dropdown-menu {
-  margin-left: 500px;
+  margin-left: 650px;
+}
+
+.container-footer {
+  text-align: center;
+}
+
+.margin-footer {
+  margin-left: 8px;
+}
+
+.link-tag {
+  text-decoration: none;
 }
