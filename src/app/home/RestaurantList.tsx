@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import homeApi from "../../api/homeApi";
 import { Restaurant } from "../../models/home";
 import { Card } from "antd";
+import { Rate } from "antd";    
 
 const { Meta } = Card;
 
@@ -50,11 +51,13 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
                 <Card
                     key={restaurant.id}
                     hoverable
-                    style={{ width: 240, margin: "0 30px" }}
+                    style={{ width: 240, margin: "0 30px", borderColor: "#cec2c2", maxWidth: "240px", minWidth: "240px", marginBottom: "20px" }}
                     cover={<img alt="restaurant img" src={restaurant.photoUrl} />}
                     bordered
                 >
-                    <Meta title={restaurant.name} description="rating" />
+                    <Meta title={restaurant.name} />
+                    <Rate allowHalf disabled defaultValue={restaurant.rating} style={{marginRight: "10px"}}/>
+                    ({restaurant.rating})
                 </Card>
             ))}
         </div>

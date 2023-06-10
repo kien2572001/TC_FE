@@ -12,11 +12,11 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
 
   return (
     <Space wrap>
-      <Button size="large">All</Button>
-      <Button size="large">Foods</Button>
-      <Button size="large">Drinks</Button>
-      <Button size="large">Rating</Button>
-      <Button size="large">Cheap</Button>
+      <Button size="large">全て</Button>
+      <Button size="large">食べ物</Button>
+      <Button size="large">飲み物</Button>
+      <Button size="large">評価</Button>
+      <Button size="large">安い</Button>
     </Space>
   );
 };
