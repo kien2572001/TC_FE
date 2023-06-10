@@ -1,36 +1,38 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { Avatar, Rate } from "antd";
 import { StarFilled } from "@ant-design/icons";
-
+import { usePathname, useRouter } from "next/navigation";
 const RestaurantDetail = () => {
-  const id = 1;
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [restaurant, setRestaurant] = useState<any | null>(null);
   const [menu, setMenu] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [rating, setRating] = useState<number>(0);
 
   useEffect(() => {
-    fetchRestaurantDetail();
-    fetchMenu();
-    fetchReviews();
+    const id: number = Number.parseInt(pathname.split("/")[2]);
+    fetchRestaurantDetail(id);
+    fetchMenu(id);
+    fetchReviews(id);
   }, []);
 
-  const fetchMenu = async () => {
+  const fetchMenu = async (id: number) => {
     try {
       const response = await axios.get(
         "http://localhost:3008/api/restaurants/detail/menu/" + id
       );
       console.log(response.data.foods);
       setMenu(response.data.foods);
-
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchReviews = async () => {
+  const fetchReviews = async (id: number) => {
     try {
       const response = await axios.get(
         "http://localhost:3008/api/restaurants/detail/reviews/" + id
@@ -42,7 +44,7 @@ const RestaurantDetail = () => {
     }
   };
 
-  const fetchRestaurantDetail = async () => {
+  const fetchRestaurantDetail = async (id: number) => {
     try {
       const response = await axios.get(
         "http://localhost:3008/api/restaurants/detail/" + id
@@ -78,10 +80,7 @@ const RestaurantDetail = () => {
             <div className="flex flex-col">
               <h1 className="text-3xl ">{restaurant?.name}</h1>
               <span className="mt-5">
-                <Rate
-                  disabled
-                  defaultValue={4}
-                />
+                <Rate disabled defaultValue={4} />
                 {restaurant?.rating ? (
                   <span className="ant-rate-text">
                     {Number(restaurant?.rating).toFixed(1)}
