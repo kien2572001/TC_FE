@@ -1,11 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import homeApi from "../../api/homeApi";
+import homeApi from "@/api/homeApi";
 import Filter from "./Filter";
 import { Food } from "@/models/home";
+import { Card } from "antd";
+import { Rate } from "antd";
+
+const { Meta } = Card;
 
 const FoodList = ({ foodsData }: { foodsData: any }) => {
   const [foods, setFoods] = useState<Food[]>(foodsData);
+
+  useEffect(() => {
+    setFoods(foodsData)
+  }, [foodsData]);
 
   // useEffect(() => {
   //   const fetchFoods = async () => {
@@ -24,20 +32,31 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
   }
 
   return (
-    <div className="flex overflow-x-scroll">
+    <div className="flex overflow-x-scroll py-[10px]">
       {foods.map((food) => (
-        <div
+        // <div
+        //   key={food.id}
+        //   className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"
+        // >
+        //   <div className="flex m-auto w-[150px] h-[170px]">
+        //     <img className="w-full h-full" src={food.photoUrl} alt="food img" />
+        //   </div>
+        //   <div className="flex m-auto flex-col">
+        //     <h2>{food.name}</h2>
+        //     <span className="align-middle items-center">rating</span>
+        //   </div>
+        // </div>
+        <Card
           key={food.id}
-          className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"
+          hoverable
+          style={{ width: 240, margin: "0 30px", borderColor: "#cec2c2", maxWidth: "240px", minWidth: "240px", marginBottom: "20px" }}
+          cover={<img alt="food img" src={food.photoUrl} />}
+          bordered
         >
-          <div className="flex m-auto w-[150px] h-[170px]">
-            <img className="w-full h-full" src={food.photoUrl} alt="food img" />
-          </div>
-          <div className="flex m-auto flex-col">
-            <h2>{food.name}</h2>
-            <span className="align-middle items-center">rating</span>
-          </div>
-        </div>
+          <Meta title={food.name} />
+          <Rate allowHalf disabled defaultValue={food.rating} style={{ marginRight: "10px" }} />
+          ({food.rating})
+        </Card>
       ))}
     </div>
   );
