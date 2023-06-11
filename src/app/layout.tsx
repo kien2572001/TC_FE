@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
+import Header from "../common/Header";
+import Footer from "../common/Footer";
 
-import Header from "./common/Header";
-import Footer from "./common/Footer";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "../store";
 
 const inter = Inter({ subsets: ["latin"] });
 
