@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
-import { Avatar, Rate } from "antd";
+import { Rate, Empty } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { usePathname, useRouter } from "next/navigation";
+
 const RestaurantDetail = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -49,11 +50,11 @@ const RestaurantDetail = () => {
       const response = await axios.get(
         "http://localhost:3008/api/restaurants/detail/" + id
       );
-      console.log(response.data.restaurant);
-      setRestaurant(response.data.restaurant);
+      console.log(response.data);
+      setRestaurant(response.data);
 
-      const rating = response.data.restaurant.rating
-        ? Math.round(Number.parseFloat(response.data.restaurant.rating))
+      const rating = response.data.rating
+        ? Math.round(Number.parseFloat(response.data.rating))
         : 0;
       console.log(rating);
       setRating(rating);
@@ -62,9 +63,13 @@ const RestaurantDetail = () => {
     }
   };
 
+  const handleRouterToFoodDetail = (id: number) => {
+    router.push("/food/" + id);
+  };
+
   return (
-    <div className="w-full flex justify-center">
-      <div className="flex flex-col">
+    <div className="w-full flex justify-center ">
+      <div className="flex flex-col mt-10 shadow-2xl p-5 rounded-lg">
         {/* Res infor block */}
         <div className="flex justify-center">
           {/* Res image block */}
@@ -72,11 +77,11 @@ const RestaurantDetail = () => {
             <img
               src={restaurant?.photoUrl}
               alt="restaurant"
-              className="w-[600px] h-[250px]"
+              className="w-[600px] h-[250px] rounded-l"
             />
           </div>
           {/* Res info block */}
-          <div className="p-5 bg-[#fd7e14] text-white text-xl ">
+          <div className="p-5 bg-[#fd7e14] text-white text-xl h-[210px] rounded-r">
             <div className="flex flex-col">
               <h1 className="text-3xl ">{restaurant?.name}</h1>
               <span className="mt-5">
@@ -107,8 +112,12 @@ const RestaurantDetail = () => {
           <div className="font-bold text-2xl">メニュー</div>
           <div className="flex  content-start">
             {menu?.map((item) => (
-              <div className="ml-4 mt-4 relative">
-                <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded">
+              <div
+                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300"
+                key={item.id}
+                onClick={() => handleRouterToFoodDetail(item.id)}
+              >
+                <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
                   <StarFilled /> {Number.parseFloat(item.rating).toFixed(1)}
                 </div>
                 <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
@@ -127,6 +136,11 @@ const RestaurantDetail = () => {
                 </div>
               </div>
             ))}
+            {menu && menu.length === 0 && (
+              <div className="flex justify-center items-center w-full h-full">
+                <Empty className="mt-5" description="メニューがありません" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -135,7 +149,10 @@ const RestaurantDetail = () => {
           <div className="font-bold text-2xl">レビュー</div>
           <div className="flex  flex-col p-4">
             {reviews?.map((item) => (
-              <div className="mb-3 p-[10px] w-full text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden cursor-pointer rounded-md border border-orange-200 border-solid flex ">
+              <div
+                className="mb-3 p-[10px] w-full text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden cursor-pointer rounded-md border border-orange-200 border-solid flex "
+                key={item.id}
+              >
                 {/* Nội dung */}
                 <img
                   src={item.userAvatar}
@@ -153,6 +170,11 @@ const RestaurantDetail = () => {
                 </div>
               </div>
             ))}
+            {reviews.length === 0 ? (
+              <Empty description="レビューがありません" />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

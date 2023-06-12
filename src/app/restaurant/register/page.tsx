@@ -6,6 +6,7 @@ import UploadImage from "../UploadImage";
 import { Store } from "antd/lib/form/interface";
 import dayjs from "dayjs";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
 
@@ -20,6 +21,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
   const [fromTime, setFromTime] = useState<dayjs.Dayjs | null>(null);
   const [toTime, setToTime] = useState<dayjs.Dayjs | null>(null);
   const [image, setImage] = useState<string>("");
+  const router = useRouter();
 
   const formItemLayout =
     formLayout === "horizontal"
@@ -50,11 +52,11 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
   };
 
   const successMessage = () => {
-    messageApi.success("レストランを登録しました");
+    message.success("レストランを登録しました");
   };
 
   const errorMessage = () => {
-    messageApi.error("レストランの登録に失敗しました");
+    message.error("レストランの登録に失敗しました");
   };
 
   const handleCreateRestaurant = async () => {
@@ -74,6 +76,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
       if (res.status === 201) {
         successMessage();
         //push to home page
+        router.push("/restaurant/" + res.data.id);
       } else {
         errorMessage();
       }
@@ -150,70 +153,24 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
             className="font-bold"
             rules={[
               {
+                required: true,
                 message: (
-                  <span className="text-red-500 text-xs mt-2">
+                  <span className="text-red-500 text-xs">
                     営業時間を入力してください
                   </span>
                 ),
               },
             ]}
           >
-            <Form.Item
-              name="fromTime"
-              rules={[
-                {
-                  required: true,
-                  message: (
-                    <span className="text-red-500 text-xs">
-                      営業時間を入力してください
-                    </span>
-                  ),
-                },
-              ]}
-              style={{
-                display: "inline-block",
-                width: "calc(50% - 40px)",
-                marginLeft: "40px",
+            <TimePicker.RangePicker
+              format="HH:mm"
+              value={[fromTime, toTime]}
+              onChange={(value) => {
+                handleFromTimeChange(value[0]);
+                handleToTimeChange(value[1]);
+                console.log(value);
               }}
-            >
-              <TimePicker
-                value={fromTime}
-                onChange={handleFromTimeChange}
-                style={{
-                  marginTop: "0px",
-                }}
-                format={"HH:mm"}
-                placeholder="開始時間"
-              />
-            </Form.Item>
-            <Form.Item
-              name="toTime"
-              style={{
-                display: "inline-block",
-                width: "calc(50% - 40px)",
-                marginLeft: "20px",
-              }}
-              rules={[
-                {
-                  required: true,
-                  message: (
-                    <span className="text-red-500 text-xs">
-                      営業時間を入力してください
-                    </span>
-                  ),
-                },
-              ]}
-            >
-              <TimePicker
-                value={toTime}
-                onChange={handleToTimeChange}
-                style={{
-                  marginTop: "0px",
-                }}
-                format={"HH:mm"}
-                placeholder="終了時間"
-              />
-            </Form.Item>
+            />
           </Form.Item>
 
           <Form.Item
