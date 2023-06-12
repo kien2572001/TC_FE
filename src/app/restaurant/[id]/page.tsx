@@ -69,7 +69,7 @@ const RestaurantDetail = () => {
 
   return (
     <div className="w-full flex justify-center ">
-      <div className="flex flex-col mt-10 shadow-2xl p-5 rounded-lg">
+      <div className="flex flex-col mt-10 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px]">
         {/* Res infor block */}
         <div className="flex justify-center">
           {/* Res image block */}
@@ -77,7 +77,7 @@ const RestaurantDetail = () => {
             <img
               src={restaurant?.photoUrl}
               alt="restaurant"
-              className="w-[600px] h-[250px] rounded-l"
+              className="w-[600px] h-[250px] rounded-l hover:scale-[1.05] cursor-pointer  transition-all duration-300 hover:rounded-r"
             />
           </div>
           {/* Res info block */}
@@ -110,10 +110,10 @@ const RestaurantDetail = () => {
         {/* Res menu block */}
         <div className="mt-5">
           <div className="font-bold text-2xl">メニュー</div>
-          <div className="flex  content-start">
+          <div className="flex  content-start	 overflow-y-hidden overflow-x-auto pb-5 max-w-full">
             {menu?.map((item) => (
               <div
-                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300"
+                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] "
                 key={item.id}
                 onClick={() => handleRouterToFoodDetail(item.id)}
               >

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import homeApi from "@/api/homeApi";
 import Filter from "./Filter";
 import { Food } from "@/models/home";
-import { Card } from "antd";
+import { Card, Empty } from "antd";
 import { Rate } from "antd";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +14,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
   const router = useRouter();
 
   useEffect(() => {
-    setFoods(foodsData)
+    setFoods(foodsData);
   }, [foodsData]);
 
   const navigateToFoodDetail = (foodId: number) => {
@@ -43,16 +43,33 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
         <Card
           key={food.id}
           hoverable
-          style={{ width: 240, margin: "0 30px", borderColor: "#cec2c2", maxWidth: "240px", minWidth: "240px", marginBottom: "20px" }}
+          style={{
+            width: 240,
+            margin: "0 30px",
+            borderColor: "#cec2c2",
+            maxWidth: "240px",
+            minWidth: "240px",
+            marginBottom: "20px",
+          }}
           cover={<img alt="food img" src={food.photoUrl} />}
           bordered
           onClick={() => navigateToFoodDetail(food.id)}
         >
           <Meta title={food.name} />
-          <Rate allowHalf disabled defaultValue={food.rating} style={{ marginRight: "10px" }} />
+          <Rate
+            allowHalf
+            disabled
+            defaultValue={food.rating}
+            style={{ marginRight: "10px" }}
+          />
           ({food.rating})
         </Card>
       ))}
+      {foods && foods.length === 0 && (
+        <div className="flex justify-center items-center w-full h-full">
+          <Empty className="mt-5" description="メニューがありません" />
+        </div>
+      )}
     </div>
   );
 };

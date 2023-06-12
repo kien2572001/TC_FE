@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import homeApi from "../../api/homeApi";
 import { Restaurant } from "../../models/home";
 import { Card } from "antd";
-import { Rate } from "antd";
+import { Rate, Empty } from "antd";
 import { useRouter } from "next/navigation";
 
 const { Meta } = Card;
@@ -51,6 +51,11 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
           ({restaurant.rating})
         </Card>
       ))}
+      {restaurants?.length === 0 && (
+        <div className="flex justify-center items-center w-full h-full">
+          <Empty className="mt-5" description=" No restaurants found." />
+        </div>
+      )}
     </div>
   );
 };
