@@ -78,11 +78,11 @@ const AddFoodPage: React.FC<Props> = () => {
   };
 
   const successMessage = () => {
-    messageApi.success("料理を登録しました");
+    message.success("料理を登録しました");
   };
 
   const errorMessage = () => {
-    messageApi.error("料理の登録に失敗しました");
+    message.error("料理の登録に失敗しました");
   };
 
   const handleCreateFood = async () => {
@@ -96,9 +96,9 @@ const AddFoodPage: React.FC<Props> = () => {
         isFood: isFood,
         isDraft: false,
       });
-      if (response?.data.message === "Food created successfully") {
+      if (response?.status === 201) {
         successMessage();
-        router.push("/restaurant/1");
+        router.push("/food/" + response?.data?.food?.id);
       }
     } catch (error) {
       errorMessage();

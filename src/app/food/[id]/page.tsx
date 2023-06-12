@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
-import { Rate } from "antd";
+import { Rate, Empty } from "antd";
 
 const FoodDetail = () => {
   const pathname = usePathname();
@@ -70,7 +70,10 @@ const FoodDetail = () => {
                   ""
                 )}
               </span>
-              <div onClick={handleRedirectToRestaurant} className="mt-2">
+              <div
+                onClick={handleRedirectToRestaurant}
+                className="mt-2 hover:text-indigo-700 cursor-pointer"
+              >
                 <span className="font-bold">レストラン名: </span>
                 {food?.restaurant}
               </div>
@@ -105,6 +108,11 @@ const FoodDetail = () => {
                 </div>
               </div>
             ))}
+            {reviews.length === 0 ? (
+              <Empty className="mt-5" description="レビューがありません" />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

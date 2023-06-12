@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
-import { Avatar, Rate } from "antd";
+import { Rate, Empty } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+
 const RestaurantDetail = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -136,6 +136,11 @@ const RestaurantDetail = () => {
                 </div>
               </div>
             ))}
+            {menu && menu.length === 0 && (
+              <div className="flex justify-center items-center w-full h-full">
+                <Empty className="mt-5" description="メニューがありません" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -165,6 +170,11 @@ const RestaurantDetail = () => {
                 </div>
               </div>
             ))}
+            {reviews.length === 0 ? (
+              <Empty description="レビューがありません" />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
