@@ -45,7 +45,7 @@ const FoodDetail = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="flex flex-col mt-10 shadow-2xl p-5 rounded-lg ">
+      <div className="flex flex-col mt-10 shadow-xl p-5 rounded-lg scale-[1.5] translate-y-[120px] mb-[350px]">
         {/* Food info block */}
         <div className="flex justify-center">
           {/* Food image block */}
@@ -53,7 +53,7 @@ const FoodDetail = () => {
             <img
               src={food?.photoUrl}
               alt="food"
-              className="w-[300px] h-[300px] rounded-l"
+              className="w-[300px] h-[300px] rounded-l hover:scale-[1.05] cursor-pointer  transition-all duration-300 hover:rounded-r"
             />
           </div>
           {/* Res info block */}
@@ -72,7 +72,7 @@ const FoodDetail = () => {
               </span>
               <div
                 onClick={handleRedirectToRestaurant}
-                className="mt-2 hover:text-indigo-700 cursor-pointer"
+                className="mt-2 hover:scale-[1.05] cursor-pointer  transition-all duration-300"
               >
                 <span className="font-bold">レストラン名: </span>
                 {food?.restaurant}
@@ -109,7 +109,7 @@ const FoodDetail = () => {
               </div>
             ))}
             {reviews.length === 0 ? (
-              <Empty className="mt-5" description="レビューがありません" />
+              <Empty className="my-5" description="レビューがありません" />
             ) : (
               ""
             )}
