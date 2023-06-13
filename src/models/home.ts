@@ -14,6 +14,6 @@ export interface Food {
     price: number;
     photoUrl: string;
     is_draft: boolean;
-    is_food: boolean;
+    isFood: boolean;
     rating: number;
 }

@@ -5,8 +5,11 @@ import { useRouter } from "next/navigation";
 import { RootState } from "@/store";
 import { usePathname } from "next/navigation";
 import { setSearchValue } from "@/features/slices/searchSlice";
+import { setFilterValue } from "@/features/slices/filterSlice";
 import { DropdownProps, Input, Space } from 'antd';
 import { Avatar, Dropdown, MenuProps } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
 
 
 const { Search } = Input;
@@ -53,6 +56,7 @@ export default function Header() {
 
     const onSearch = (value: string) => {
         dispatch(setSearchValue(value))
+        dispatch(setFilterValue('all'))
         if (pathName !== '/home') {
             router.push('/home');
         }
@@ -61,6 +65,7 @@ export default function Header() {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         dispatch(setSearchValue(value));
+        dispatch(setFilterValue('all'))
         if (pathName !== '/home') {
             router.push('/home');
         }
@@ -90,7 +95,7 @@ export default function Header() {
     return (
         <div>
             {
-                localStorage.getItem('accessToken') &&
+                pathName !== '/login' &&
                 (
                     <div className="container">
                         <Link href='/home' className="logo">
@@ -98,14 +103,23 @@ export default function Header() {
                         </Link>
                         <Search placeholder="検索" enterButton onSearch={onSearch} onChange={onChange} className="search-bar" />
 
-                        <Dropdown menu={{ items }} placement="bottomRight" arrow className="dropdown-menu">
-                            <Space>
-                                <Avatar src={imgSrc} size={50} />
-                                <span style={{ marginLeft: 5 }}>{userName}</span>
-                            </Space>
-
-                        </Dropdown>
-                        <br />
+                        {
+                            localStorage.getItem('accessToken') ? (
+                                <Dropdown menu={{ items }} placement="bottomRight" arrow className="dropdown-menu">
+                                    <Space>
+                                        <Avatar src={imgSrc} size={50} />
+                                        <span style={{ marginLeft: 5 }}>{userName}</span>
+                                    </Space>
+                                </Dropdown>
+                            )
+                                : (
+                                    <Avatar style={{ marginLeft: '600px', cursor: 'pointer' }} size={40} icon={<UserOutlined />}
+                                        onClick={() => {
+                                            router.push('/login');
+                                        }} />
+                                )
+                        }
+                        <br /><br /><br />
                     </div>
                 )
             }
