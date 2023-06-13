@@ -28,6 +28,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
   return (
     <div className="flex overflow-x-scroll py-[10px]">
       {foods.map((food) => (
+        
         // <div
         //   key={food.id}
         //   className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"

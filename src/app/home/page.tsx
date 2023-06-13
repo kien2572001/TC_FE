@@ -65,36 +65,12 @@ const foodsData: any = [
 ];
 
 const Home = (props: Props) => {
-  const [filterValue, setFilterValue] = useState("");
-
-  const handleFilterChange = (value: string) => {
-    setFilterValue(value);
-    const filteredRestaurants: any = restaurantsData.filter(
-      (restaurant: any) => {
-        restaurant.name.includes(filterValue);
-      }
-    );
-    setRestaurants(filteredRestaurants);
-  };
-
-  useEffect(() => {
-    console.log("handleFilterChange useEffect", filterValue);
-  }, [filterValue]);
-
-  const handleSearch = () => {
-    console.log("search");
-    const filteredRestaurants: any = restaurantsData.filter((restaurant: any) =>
-      restaurant.name.includes(filterValue)
-    );
-    setRestaurants(filteredRestaurants);
-  };
-
   const [restaurants, setRestaurants] = useState<Restaurant[]>(restaurantsData);
   const [foods, setFoods] = useState<Food[]>(foodsData);
   const keyword = useSelector((state: RootState) => state.search.searchValue);
+  const filterValue = useSelector((state: RootState) => state.filter.filterValue)
   const restaurantRef = useRef<Restaurant[]>([]);
   const foodRef = useRef<Food[]>([]);
-
 
 
   useEffect(() => {
@@ -149,6 +125,35 @@ const Home = (props: Props) => {
     }
   }, [useSelector((state: RootState) => state.search.searchValue)])
 
+
+  useEffect(() => { //filter foods
+    let filteredFoods: Food[] = [];
+    switch (filterValue) {
+      case 'all': {
+        filteredFoods = foodRef.current;
+        break;
+      }
+      case 'food': {
+        filteredFoods = foodRef.current.filter(food => food.isFood);
+        break;
+      }
+      case 'drink': {
+        filteredFoods = foodRef.current.filter(food => !food.isFood);
+        break;
+      }
+      case 'rating': {
+        filteredFoods = foodRef.current.filter(food => food.rating >= 4);
+        break;
+      }
+      case 'cheap': {
+        filteredFoods = foodRef.current.filter(food => food.price <= 30000);
+        break;
+      }
+    }
+    setFoods(filteredFoods);
+  }, [filterValue]);
+
+
   return (
     <div className="space-y-[10px] py-[20px] mb-[20px] bg-cover bg-[url('https://img.freepik.com/free-photo/blurred-corridor-with-chairs-tables_1203-166.jpg?w=740&t=st=1686197323~exp=1686197923~hmac=2e1b0a787055a1176f03ef10a7990945b584d6fd9d8d2ed6bec593905a190b28')]">
       <div className="flex max-w-[1500px] m-auto p-[30px] flex-col shadow-md shadow-gray rounded-md max-h-[400px] space-y-[10px] bg-white">
@@ -159,9 +164,6 @@ const Home = (props: Props) => {
         <div className="flex place-content-between border-solid border-gray border-0 border-b-[1px]">
           <h1 className="leading-none">おすすめ料理</h1>
           <Filter
-            onFilterChange={function (value: string): void {
-              throw new Error("Function not implemented.");
-            }}
           />
         </div>
 
