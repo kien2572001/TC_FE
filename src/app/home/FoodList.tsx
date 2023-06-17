@@ -6,6 +6,7 @@ import { Food } from "@/models/home";
 import { Card, Empty } from "antd";
 import { Rate } from "antd";
 import { useRouter } from "next/navigation";
+import { StarFilled } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -25,8 +26,9 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
     return <p>No foods found.</p>;
   }
 
+
   return (
-    <div className="flex overflow-x-scroll py-[10px]">
+    <div className="flex overflow-x-scroll pt-[10px] pb-[20px]">
       {foods.map((food) => (
         
         // <div
@@ -38,36 +40,35 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
         //   </div>
         //   <div className="flex m-auto flex-col">
         //     <h2>{food.name}</h2>
-        //     <span className="align-middle items-center">rating</span>
+        //     <span className="align-middle foods-center">rating</span>
         //   </div>
         // </div>
-        <Card
-          key={food.id}
-          hoverable
-          style={{
-            width: 240,
-            margin: "0 30px",
-            borderColor: "#cec2c2",
-            maxWidth: "240px",
-            minWidth: "240px",
-            marginBottom: "20px",
-          }}
-          cover={<img alt="food img" src={food.photoUrl} />}
-          bordered
-          onClick={() => navigateToFoodDetail(food.id)}
-        >
-          <Meta title={food.name} />
-          <Rate
-            allowHalf
-            disabled
-            defaultValue={food.rating}
-            style={{ marginRight: "10px" }}
-          />
-          ({food.rating})
-        </Card>
+        <div
+                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] "
+                key={food.id}
+                onClick={() => navigateToFoodDetail(food.id)}
+              >
+                <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
+                  <StarFilled /> {Number.parseFloat(food.rating).toFixed(1)}
+                </div>
+                <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
+                  {/* Nội dung */}
+                  <div className="h-[170px] w-full overflow-hidden">
+                    <img
+                      src={food.photoUrl}
+                      alt="food"
+                      className="w-full h-fit"
+                    />
+                  </div>
+                  <h5 className="font-bold my-2 ">{food.name}</h5>
+                  <p className="text-[#FF7918] font-bold text-base mt-2">
+                    {food.price}VND
+                  </p>
+                </div>
+              </div>
       ))}
       {foods && foods.length === 0 && (
-        <div className="flex justify-center items-center w-full h-full">
+        <div className="flex justify-center foods-center w-full h-full">
           <Empty className="mt-5" description="メニューがありません" />
         </div>
       )}
