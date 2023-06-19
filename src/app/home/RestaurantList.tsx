@@ -28,11 +28,11 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
     <div className="flex overflow-x-scroll pt-[10px] pb-[20px]">
       {restaurants.map((restaurant) => (
         <div
-          className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] "
+          className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px]"
           key={restaurant.id}
           onClick={() => navigateToRestaurantDetail(restaurant.id)}
         >
-          <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
+          <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
             <StarFilled /> {Number.parseFloat(restaurant.rating).toFixed(1)}
           </div>
           <div className="p-[10px] h-[210px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
