@@ -13,6 +13,7 @@ export interface Food {
     name: string;
     price: number;
     photoUrl: string;
+    restaurant: string;
     is_draft: boolean;
     isFood: boolean;
     rating: number;
