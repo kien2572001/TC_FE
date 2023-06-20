@@ -61,7 +61,7 @@ const RestaurantDetail = () => {
 
   return (
     <div className="w-full flex justify-center ">
-      <div className="flex flex-col mt-16 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px] max-w-[950px]">
+      <div className="flex flex-col mt-24 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px] max-w-[980px]">
         {/* Res infor block */}
         <div className="flex justify-center">
           {/* Res image block */}
@@ -75,7 +75,7 @@ const RestaurantDetail = () => {
           {/* Res info block */}
           <div className="p-5 bg-[#fd7e14] text-white text-xl h-[210px] rounded-r">
             <div className="flex flex-col">
-              <h1 className="text-3xl ">{restaurant?.name}</h1>
+              <h1 className="text-3xl truncate text-ellipsis">{restaurant?.name}</h1>
               <span className="mt-5">
                 <Rate disabled allowHalf value={restaurant?.rating} />
                 {restaurant?.rating ? (
