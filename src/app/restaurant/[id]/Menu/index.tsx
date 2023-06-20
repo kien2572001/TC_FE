@@ -22,7 +22,7 @@ const Menu = ({ menu, handleRouterToFoodDetail }: MenuProps) => {
           key={item.id}
           onClick={() => handleRouterToFoodDetail(item.id)}
         >
-          <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 rounded">
+          <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 rounded z-20">
             <StarFilled /> {Number.parseFloat(item.rating).toFixed(1)}
           </div>
           <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
