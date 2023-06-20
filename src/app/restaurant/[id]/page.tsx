@@ -12,8 +12,6 @@ const RestaurantDetail = () => {
   const [restaurant, setRestaurant] = useState<any | null>(null);
   const [menu, setMenu] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
-  const [rating, setRating] = useState<number>(0);
-
   useEffect(() => {
     const id: number = Number.parseInt(pathname.split("/")[2]);
     fetchRestaurantDetail(id);
@@ -52,12 +50,6 @@ const RestaurantDetail = () => {
       );
       console.log(response.data);
       setRestaurant(response.data);
-
-      const rating = response.data.rating
-        ? Math.round(Number.parseFloat(response.data.rating))
-        : 0;
-      console.log(rating);
-      setRating(rating);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +61,7 @@ const RestaurantDetail = () => {
 
   return (
     <div className="w-full flex justify-center ">
-      <div className="flex flex-col mt-10 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px]">
+      <div className="flex flex-col mt-16 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px]">
         {/* Res infor block */}
         <div className="flex justify-center">
           {/* Res image block */}
@@ -85,7 +77,7 @@ const RestaurantDetail = () => {
             <div className="flex flex-col">
               <h1 className="text-3xl ">{restaurant?.name}</h1>
               <span className="mt-5">
-                <Rate disabled defaultValue={4} />
+                <Rate disabled allowHalf value={restaurant?.rating} />
                 {restaurant?.rating ? (
                   <span className="ant-rate-text">
                     {Number(restaurant?.rating).toFixed(1)}
@@ -113,7 +105,7 @@ const RestaurantDetail = () => {
           <div className="flex  content-start	 overflow-y-hidden overflow-x-auto pb-5 max-w-full">
             {menu?.map((item) => (
               <div
-                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] "
+                className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex_1_0_25"
                 key={item.id}
                 onClick={() => handleRouterToFoodDetail(item.id)}
               >
