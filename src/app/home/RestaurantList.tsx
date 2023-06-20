@@ -33,7 +33,7 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
           onClick={() => navigateToRestaurantDetail(restaurant.id)}
         >
           <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
-            <StarFilled /> {Number.parseFloat(restaurant.rating).toFixed(1)}
+            <StarFilled /> {restaurant.rating}
           </div>
           <div className="p-[10px] h-[210px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}

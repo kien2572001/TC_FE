@@ -73,7 +73,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
         </div>
       )}
     </div>
-  );
+  );g
 };
 
 export default FoodList;
