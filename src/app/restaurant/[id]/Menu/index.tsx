@@ -15,14 +15,14 @@ const Menu = ({ menu, handleRouterToFoodDetail }: MenuProps) => {
     slidesToScroll: 1, // Số item được lướt qua khi ấn nút
   };
   return (
-    <div className="flex pb-5 w-full overflow-x-scroll overflow-y-hidden">
+    <div className="flex pb-5 w-full overflow-x-scroll overflow-y-hidden p-2 ">
       {menu?.map((item) => (
         <div
-          className="ml-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_230px]"
+          className=" relative hover:scale-105 transition-all duration-300 flex-[1_0_230px] max-w-[230px] mx-2"
           key={item.id}
           onClick={() => handleRouterToFoodDetail(item.id)}
         >
-          <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded">
+          <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 rounded">
             <StarFilled /> {Number.parseFloat(item.rating).toFixed(1)}
           </div>
           <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
