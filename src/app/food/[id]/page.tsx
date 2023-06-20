@@ -84,7 +84,10 @@ const FoodDetail = () => {
               </div>
               <div className="mt-2 max-w-[400px]">
                 <span className="font-bold">説明: </span>
-                <span className="text-xl"> {food?.description}</span>
+                <span className="text-xl max-w-[400px] break-words">
+                  {" "}
+                  {food?.description}
+                </span>
               </div>
             </div>
           </div>
