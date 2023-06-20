@@ -45,11 +45,11 @@ const FoodDetail = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="flex flex-col mt-10 shadow-xl p-5 rounded-lg scale-[1.5] translate-y-[120px] mb-[350px]">
+      <div className="flex flex-col mt-10 shadow-xl p-5 rounded-lg scale-[1.5] translate-y-[120px] mb-[350px] ">
         {/* Food info block */}
         <div className="flex justify-center">
           {/* Food image block */}
-          <div>
+          <div className="bg-[#fd7e14] rounded-l">
             <img
               src={food?.photoUrl}
               alt="food"
@@ -57,7 +57,7 @@ const FoodDetail = () => {
             />
           </div>
           {/* Res info block */}
-          <div className="p-5 pl-10 pr-96 bg-[#fd7e14] text-white text-xl h-[260px] rounded-r">
+          <div className="p-5 pl-10 pr-52 bg-[#fd7e14] text-white text-xl min-h-[260px] rounded-r">
             <div className="flex flex-col">
               <h1 className="text-3xl ">{food?.name}</h1>
               <span className="mt-5">
@@ -77,9 +77,16 @@ const FoodDetail = () => {
                 <span className="font-bold">レストラン名: </span>
                 {food?.restaurant}
               </div>
-              <div className="">
+              <div className="mt-2">
                 <span className="text-xl">
                   <span className="font-bold">価格: </span> {food?.price} VND
+                </span>
+              </div>
+              <div className="mt-2 max-w-[400px]">
+                <span className="font-bold">説明: </span>
+                <span className="text-xl max-w-[400px] break-words">
+                  {" "}
+                  {food?.description}
                 </span>
               </div>
             </div>

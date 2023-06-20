@@ -29,6 +29,7 @@ const AddFoodPage: React.FC<Props> = () => {
   const [foodName, setFoodName] = useState<string>("");
   const [foodPrice, setFoodPrice] = useState<string>("");
   const [restaurantId, setRestaurantId] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [isFood, setIsFood] = useState<boolean>(false);
 
@@ -92,6 +93,7 @@ const AddFoodPage: React.FC<Props> = () => {
         name: foodName,
         price: Number.parseInt(foodPrice),
         restaurantId: restaurantId,
+        description: description,
         photoUrl: image,
         isFood: isFood,
         isDraft: false,
@@ -150,17 +152,6 @@ const AddFoodPage: React.FC<Props> = () => {
           </Form.Item>
           <Form.Item
             label={<span className="font-bold text-lg">料理価格</span>}
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: (
-            //       <span className="text-red-500 text-xs">
-            //         料理価格を入力してください
-            //       </span>
-            //     ),
-            //     validator: foodPriceValidation,
-            //   },
-            // ]}
             className="font-bold flex justify-between items-center"
           >
             <Input
@@ -198,6 +189,28 @@ const AddFoodPage: React.FC<Props> = () => {
               options={restaurantList}
               value={restaurantId}
               onChange={(value) => setRestaurantId(value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label={<span className="font-bold text-lg">説明</span>}
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <span className="text-red-500 text-xs">
+                    説明を入力してください
+                  </span>
+                ),
+                max: 400,
+              },
+            ]}
+            className="font-bold"
+          >
+            <Input.TextArea
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Item>
           <Form.Item
