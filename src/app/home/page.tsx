@@ -8,6 +8,7 @@ import Filter from "./Filter";
 import homeApi from "@/api/homeApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { usePathname } from "next/navigation";
 
 type Props = {};
 
@@ -71,6 +72,7 @@ const Home = (props: Props) => {
   const filterValue = useSelector((state: RootState) => state.filter.filterValue)
   const restaurantRef = useRef<Restaurant[]>([]);
   const foodRef = useRef<Food[]>([]);
+  const pathName = usePathname();
 
 
   useEffect(() => {
@@ -79,31 +81,6 @@ const Home = (props: Props) => {
     console.log("data", foodsData);
   }, []);
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const response = await homeApi.getRestaurantsAll();
-        setRestaurants(response.restaurants)
-        restaurantRef.current = response.restaurants;
-        console.log(restaurantRef.current);
-      } catch (error) {
-        console.error("Failed to fetch restaurants:", error);
-      }
-    };
-    fetchRestaurants();
-
-    const fetchFoods = async () => {
-      try {
-        const response = await homeApi.getFoodAll();
-        setFoods(response.foods);
-        foodRef.current = response.foods;
-        console.log(response)
-      } catch (error) {
-        console.error("Failed to fetch foods:", error);
-      }
-    };
-    fetchFoods();
-  }, []);
 
   useEffect(() => { //search by keyword
     const fetchByKeyword = async () => {
@@ -111,7 +88,7 @@ const Home = (props: Props) => {
         const response = await homeApi.searchByKeyword(keyword);
         setRestaurants(response.restaurant);
         setFoods(response.food);
-        console.log(keyword)
+        console.log(response)
       } catch (error) {
         console.error("Failed to fetch restaurants:", error);
       }
@@ -120,10 +97,31 @@ const Home = (props: Props) => {
       fetchByKeyword();
     }
     else {
-      setRestaurants(restaurantRef.current);
-      setFoods(foodRef.current);
+      const fetchRestaurants = async () => {
+        try {
+          const response = await homeApi.getRestaurantsAll();
+          setRestaurants(response.restaurants)
+          restaurantRef.current = response.restaurants;
+          console.log(restaurantRef.current);
+        } catch (error) {
+          console.error("Failed to fetch restaurants:", error);
+        }
+      };
+      fetchRestaurants();
+
+      const fetchFoods = async () => {
+        try {
+          const response = await homeApi.getFoodAll();
+          setFoods(response.foods);
+          foodRef.current = response.foods;
+          console.log(response)
+        } catch (error) {
+          console.error("Failed to fetch foods:", error);
+        }
+      };
+      fetchFoods();
     }
-  }, [useSelector((state: RootState) => state.search.searchValue)])
+  }, [keyword, pathName])
 
 
   useEffect(() => { //filter foods
