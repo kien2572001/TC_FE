@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { Rate, Empty } from "antd";
+import ReviewModal from "@/common/ReviewModal";
 
 const FoodDetail = () => {
   const pathname = usePathname();
@@ -41,6 +42,14 @@ const FoodDetail = () => {
   const router = useRouter();
   const handleRedirectToRestaurant = () => {
     router.push("/restaurant/" + food?.restaurantId);
+  };
+
+  const updateComment = (comment: any) => {
+    let newReviews = [...reviews, comment];
+    newReviews = newReviews.sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+    setReviews(newReviews);
   };
 
   return (
@@ -94,7 +103,15 @@ const FoodDetail = () => {
         </div>
         {/* Res review block */}
         <div className="mt-5">
-          <div className="font-bold text-2xl">レビュー</div>
+          <div className="font-bold text-2xl flex justify-between">
+            <span className="font-bold">レビュー</span>
+            <ReviewModal
+              name={food?.name}
+              id={food?.id}
+              type="food"
+              updateComment={updateComment}
+            />
+          </div>
           <div className="flex  flex-col p-4">
             {reviews?.map((item) => (
               <div className="mb-3 p-[10px] w-full text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden cursor-pointer rounded-md border border-orange-200 border-solid flex ">
