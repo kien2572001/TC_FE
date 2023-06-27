@@ -28,21 +28,8 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
 
 
   return (
-    <div className="flex overflow-x-scroll pt-[10px] pb-[20px]">
+    <div className="flex overflow-x-scroll pt-[10px] pb-[10px]">
       {foods.map((food) => (
-
-        // <div
-        //   key={food.id}
-        //   className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"
-        // >
-        //   <div className="flex m-auto w-[150px] h-[170px]">
-        //     <img className="w-full h-full" src={food.photoUrl} alt="food img" />
-        //   </div>
-        //   <div className="flex m-auto flex-col">
-        //     <h2>{food.name}</h2>
-        //     <span className="align-middle foods-center">rating</span>
-        //   </div>
-        // </div>
         <div
           className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px]"
           key={food.id}
@@ -53,11 +40,11 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
           </div>
           <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
-            <div className="h-[170px] w-full overflow-hidden">
+            <div className="h-[170px] w-full overflow-hidden ">
               <img
                 src={food.photoUrl}
                 alt="food"
-                className="w-full h-fit"
+                className="w-full max-h-[133px] object-fill"
               />
             </div>
             <h5 className="font-bold my-2 ">{food.name}</h5>

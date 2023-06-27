@@ -62,7 +62,7 @@ const FoodDetail = () => {
             <img
               src={food?.photoUrl}
               alt="food"
-              className="w-[300px] h-[300px] rounded-l hover:scale-[1.05] cursor-pointer  transition-all duration-300 hover:rounded-r"
+              className="w-[300px] h-full rounded-l hover:scale-[1.05] cursor-pointer  transition-all duration-300 hover:rounded-r object-fill"
             />
           </div>
           {/* Res info block */}
