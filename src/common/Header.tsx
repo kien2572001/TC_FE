@@ -52,6 +52,8 @@ export default function Header() {
         },
     ];
 
+    const userAvatar = localStorage.getItem('userAvatar');
+
 
 
     const onSearch = (value: string) => {
@@ -76,6 +78,7 @@ export default function Header() {
         switch (itemKey) {
             case 'Profile':
                 console.log('profile')
+                router.push('/user-profile');
                 break;
             case 'Settings':
                 console.log('settings')
@@ -107,7 +110,7 @@ export default function Header() {
                             localStorage.getItem('accessToken') ? (
                                 <Dropdown menu={{ items }} placement="bottomRight" arrow className="dropdown-menu">
                                     <Space>
-                                        <Avatar src={imgSrc} size={50} />
+                                        <Avatar src={userAvatar} size={50} />
                                         <span style={{ marginLeft: 5 }}>{userName}</span>
                                     </Space>
                                 </Dropdown>
