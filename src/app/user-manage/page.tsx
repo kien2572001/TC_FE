@@ -1,19 +1,15 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Space, Table, Input } from 'antd';
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import axios from 'axios';
+import { User } from '@/models/user';
+import userApi from '@/api/userApi';
 
 type Props = {};
 
-interface DataType {
-  key: string;
-  ID: number;
-  username: string;
-  email: string;
-}
 
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<User> = [
   {
     title: 'ID',
     dataIndex: 'ID',
@@ -42,42 +38,55 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    ID: 1,
-    username: 'John Brown',
-    email: 'example1@gmail.com',
-  },
-  {
-    key: '2',
-    ID: 2,
-    username: 'John Brown',
-    email: 'example1@gmail.com',
-  },
-  {
-    key: '3',
-    ID: 3,
-    username: 'John Brown',
-    email: 'example1@gmail.com',
-  },
-];
+
 
 const UserManage: React.FC<Props> = () => {
-    return (
-        <div className="space-y-[10px] py-[20px] mb-[20px] bg-cover bg-[url('https://img.freepik.com/free-photo/blurred-corridor-with-chairs-tables_1203-166.jpg?w=740&t=st=1686197323~exp=1686197923~hmac=2e1b0a787055a1176f03ef10a7990945b584d6fd9d8d2ed6bec593905a190b28')]">
-            <div className="flex max-w-[1200px] 2xl:max-w-[1500px] h-[800px] m-auto p-[30px] flex-col shadow-md shadow-gray rounded-md max-h-[600px] min-h-[400px] space-y-[10px] bg-white">
-                <div className="pb-[20px] border-solid border-gray border-0 border-b-[1px] flex flex-row">
-                <h1 className="leading-none w-full">ユーザー管理</h1>
-                {/* search */}
-                <Input.Search placeholder="ユーザー名" allowClear onSearch={value => console.log(value)} enterButton className="m-auto"/>
-                </div>
-                <>
-                <Table columns={columns} dataSource={data}/>
-                </>
-            </div>
+  const pagination: TablePaginationConfig = {
+    pageSize: 5,
+  };
+  const [users, setUsers] = useState<User[]>();
+  const [query, setQuery] = useState('');
+
+  const onSearch = (value: any) => {
+    console.log(value);
+    setQuery(value);
+  }
+
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      const usersRes = await userApi.getAllUsers();
+      setUsers(usersRes);
+    }
+    fetchAllUsers();
+  }, [])
+
+  useEffect(() => {
+    const fetchUsersBySearch = async () => {
+      const usersFound = await userApi.searchUserByName(query);
+      console.log(usersFound);
+
+    }
+    fetchUsersBySearch();
+  }, [query])
+
+  // useEffect(() => {
+  //   console.log(users);
+  // }, users)
+
+  return (
+    <div className="space-y-[10px] py-[20px] mb-[20px] bg-cover bg-[url('https://img.freepik.com/free-photo/blurred-corridor-with-chairs-tables_1203-166.jpg?w=740&t=st=1686197323~exp=1686197923~hmac=2e1b0a787055a1176f03ef10a7990945b584d6fd9d8d2ed6bec593905a190b28')]">
+      <div className="flex max-w-[1200px] 2xl:max-w-[1500px] h-[800px] m-auto p-[30px] flex-col shadow-md shadow-gray rounded-md max-h-[600px] min-h-[400px] space-y-[10px] bg-white">
+        <div className="pb-[20px] border-solid border-gray border-0 border-b-[1px] flex flex-row">
+          <h1 className="leading-none w-full">ユーザー管理</h1>
+          {/* search */}
+          <Input.Search placeholder="ユーザー名" allowClear onSearch={onSearch} enterButton className="m-auto" />
         </div>
-    );
+        <>
+          <Table columns={columns} dataSource={users} pagination={pagination} />
+        </>
+      </div>
+    </div>
+  );
 }
 
 export default UserManage;
