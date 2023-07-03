@@ -18,7 +18,17 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const publicRoutes = ["/register", "/login", "/home", "/restaurant/register","/restaurant/add-food","/restaurant/[id]"];
+  const publicRoutes = [
+    "/register",
+    "/login",
+    "/home",
+    "/restaurant/register",
+    "/restaurant/add-food",
+    "/restaurant/[id]",
+    "/admin/restaurant",
+    "/admin",
+    "/admin/foods",
+  ];
   const routesWithoutHeaderFooter = [
     "/login",
     "/register",

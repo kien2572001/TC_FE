@@ -78,7 +78,6 @@ const ReviewModal = ({ name, id, updateComment, type }: ReviewModalProps) => {
           </div>
           <div className="flex justify-center">
             <Rate
-              allowHalf
               defaultValue={rating}
               onChange={handleChange}
               style={{ fontSize: 30 }}
