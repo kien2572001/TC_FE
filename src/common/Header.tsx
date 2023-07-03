@@ -130,48 +130,49 @@ export default function Header() {
     }
   };
 
-  return (
-    <div>
-      {pathName !== "/login" && (
-        <div className="container">
-          <Link href="/home" className="logo">
-            <span className="">TC</span>
-          </Link>
-          <Search
-            placeholder="検索"
-            enterButton
-            onSearch={onSearch}
-            onChange={onChange}
-            className="search-bar"
-          />
+    return (
+        <div className="flex flex-row space-x-3">
+            {
+                pathName !== '/login' &&
+                (
+                    <div className="p-[10px] w-full flex flex-row m-auto justify-between" >
+                        <div className="" style={ {padding: "15px"} }>
+                        <Link href='/home' className="m-auto text-black" style={{textDecoration: "none"}}>
+                            <span className="leading-none text-[30px] text-[#333] " style={{fontSize: "30px", color: "#333"}}>TC</span>
+                        </Link>
+                        </div>
+                        <div>
+                        <Search 
+                            placeholder="検索" 
+                            enterButton 
+                            onSearch={onSearch} 
+                            onChange={onChange} 
+                            className="m-auto"    
+                            style={{ minWidth: 300 , paddingTop: "15px", width: "100%"}}
+                        />
+                        </div>
+                        <div className="mr-[30px]">
+                        {
+                            localStorage.getItem('accessToken') ? (
+                                <Dropdown menu={{ items }} placement="bottomRight" arrow className="">
+                                    <Space>
+                                        <Avatar src={userAvatar} size={50} />
+                                        <span>{userName}</span>
+                                    </Space>
+                                </Dropdown>
+                            )
+                                : (
+                                    <Avatar style={{ cursor: 'pointer' }} size={40} icon={<UserOutlined />}
+                                        onClick={() => {
+                                            router.push('/login');
+                                        }} />
+                                )
+                        }
+                        </div>
+                    </div>
+                )
+            }
 
-          {localStorage.getItem("accessToken") ? (
-            <Dropdown
-              menu={{ items }}
-              placement="bottomRight"
-              arrow
-              className="dropdown-menu"
-            >
-              <Space>
-                <Avatar src={userAvatar} size={50} />
-                <span style={{ marginLeft: 5 }}>{userName}</span>
-              </Space>
-            </Dropdown>
-          ) : (
-            <Avatar
-              style={{ marginLeft: "600px", cursor: "pointer" }}
-              size={40}
-              icon={<UserOutlined />}
-              onClick={() => {
-                router.push("/login");
-              }}
-            />
-          )}
-          <br />
-          <br />
-          <br />
         </div>
-      )}
-    </div>
   );
 }

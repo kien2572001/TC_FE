@@ -28,7 +28,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
   }
 
   return (
-    <div className="flex overflow-x-scroll pt-[10px] pb-[10px]">
+    <div className="flex overflow-x-scroll pt-[10px] pb-[10px] mb-[10px]">
       {foods.map((food) => (
         <Link
           href={`/food/${food.id}`}
@@ -36,9 +36,9 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
           key={food.id}
           style={{ textDecoration: "none" }}
         >
-          <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
+          {/* <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
             <StarFilled /> {Number.parseFloat(food.rating).toFixed(1)}
-          </div>
+          </div> */}
           <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
             <div className="h-[170px] w-full overflow-hidden ">
@@ -49,9 +49,15 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
               />
             </div>
             <h5 className="font-bold my-2 ">{food.name}</h5>
-            <p className="text-[#FF7918] font-bold text-base mt-2">
+            <p className="text-[#FF7918] font-bold text-base mt-2 leading-none">
               {food.price}VND
             </p>
+            <Rate
+              disabled
+              allowHalf
+              defaultValue={Number.parseFloat(food.rating)}
+            />
+            <span className="pl-[4px] pb-[20px]">({food.rating})</span>
           </div>
         </Link>
       ))}
