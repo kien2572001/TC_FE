@@ -14,17 +14,17 @@ import FoodsTable from "./Table/FoodsTable";
 import { useRouter } from "next/navigation";
 const items: MenuProps["items"] = [
   {
-    label: "Restaurants",
+    label: "レストラン",
     key: "restaurants",
     icon: <ShopOutlined />,
   },
   {
-    label: "Users",
+    label: "ユーザー",
     key: "users",
     icon: <TeamOutlined />,
   },
   {
-    label: "Foods",
+    label: "料理",
     key: "foods",
     icon: <CoffeeOutlined />,
   },
@@ -120,8 +120,8 @@ const AdminPage = () => {
     );
 
     return [
-      ...itemWithActiveStatus,
       ...itemWithInactiveStatus,
+      ...itemWithActiveStatus,
       ...itemWithBlockedStatus,
     ];
   };
@@ -222,9 +222,9 @@ const AdminPage = () => {
             items={items}
           />
           <Search
-            placeholder="input search text"
+            placeholder="検索したいレストラン名を入力する"
             allowClear
-            enterButton="Search"
+            enterButton="検索"
             size="large"
             onSearch={onSearch}
             style={{

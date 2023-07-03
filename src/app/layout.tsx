@@ -22,12 +22,7 @@ export default function RootLayout({
     "/register",
     "/login",
     "/home",
-    "/restaurant/register",
-    "/restaurant/add-food",
     "/restaurant/[id]",
-    "/admin/restaurant",
-    "/admin",
-    "/admin/foods",
   ];
   const routesWithoutHeaderFooter = [
     "/login",
@@ -35,6 +30,8 @@ export default function RootLayout({
     "/restaurant/register",
     "/restaurant/add-food",
   ];
+
+  const adminRoutes = ["/admin"];
 
   useEffect(() => {
     if (

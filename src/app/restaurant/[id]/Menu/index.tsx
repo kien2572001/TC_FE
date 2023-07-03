@@ -27,9 +27,6 @@ const Menu = ({ menu, handleRouterToFoodDetail }: MenuProps) => {
           </div>
           <div className="p-[10px] h-[230px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
-            {/* <div className="h-[170px] w-full overflow-hidden ">
-              <img src={item.photoUrl} alt="food" className="w-full max-h-[170px] object-cover" />
-            </div> */}
             <div className="max-h-[170px] w-full overflow-hidden ">
               <img
                 src={item.photoUrl}

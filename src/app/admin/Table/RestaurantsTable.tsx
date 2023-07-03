@@ -21,19 +21,19 @@ import { useRouter } from "next/router";
 
 const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const columns: ColumnsType<DataType> = [
-    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "名前", dataIndex: "name", key: "name" },
     {
-      title: "Link",
+      title: "リンク",
       dataIndex: "",
       key: "link",
       render: (record) => (
         <div onClick={() => navigateTo(record.link)}>
-          <span className="text-blue-500 cursor-pointer">View</span>
+          <span className="text-blue-500 cursor-pointer">表示</span>
         </div>
       ),
     },
     {
-      title: "Action",
+      title: "アクション",
       dataIndex: "",
       key: "action",
       render: (record) => (
@@ -44,13 +44,13 @@ const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
                 className="text-blue-500 cursor-pointer"
                 onClick={() => acceptRestaurant(record.key)}
               >
-                Accept
+                アクセプト
               </span>
               <span
                 className="text-green-500 cursor-pointer"
                 onClick={() => rejectRestaurant(record.key)}
               >
-                Reject
+                拒否
               </span>
             </div>
           ) : (
@@ -60,14 +60,14 @@ const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
                   className="text-green-500 cursor-pointer"
                   onClick={() => rejectRestaurant(record.key)}
                 >
-                  Block
+                  ブロック
                 </span>
               ) : (
                 <span
                   className="text-blue-500 cursor-pointer"
                   onClick={() => acceptRestaurant(record.key)}
                 >
-                  Unblock
+                  ブロック解除
                 </span>
               )}
             </>
@@ -113,7 +113,7 @@ const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
         expandable={{
           expandedRowRender: (record) => (
             <p style={{ margin: 0 }}>
-              <span className="font-bold">Address: </span>
+              <span className="font-bold">住所: </span>
               {record.address}
             </p>
           ),

@@ -32,7 +32,6 @@ const FoodDetail = () => {
       const response = await axios.get(
         "http://localhost:3008/api/foods/detail/" + id
       );
-      //console.log(response.data.food);
       setFood(response.data.food);
     } catch (error) {
       console.log(error);
@@ -70,7 +69,7 @@ const FoodDetail = () => {
             <div className="flex flex-col">
               <h1 className="text-3xl ">{food?.name}</h1>
               <span className="mt-5">
-                <Rate disabled defaultValue={4} />
+                <Rate disabled value={food?.rating} />
                 {food?.rating ? (
                   <span className="ant-rate-text">
                     {Number(food?.rating).toFixed(1)}
