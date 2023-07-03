@@ -9,48 +9,81 @@ import userApi from '@/api/userApi';
 type Props = {};
 
 
-const columns: ColumnsType<User> = [
-  {
-    title: 'ID',
-    dataIndex: 'ID',
-    key: 'ID',
-  },
-  {
-    title: 'ユーザー名',
-    dataIndex: 'username',
-    key: 'username',
-  },
-  {
-    title: 'メール',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    width: 360,
-    render: () => (
-      <Space size="middle">
-        <a>アクセプト</a>
-        <a>ブロック</a>
-      </Space>
-    ),
-  },
-];
-
-
 
 const UserManage: React.FC<Props> = () => {
+  const [users, setUsers] = useState<User[]>();
+  const [query, setQuery] = useState('');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const headers = {
+    Authorization: `Bearer ${refreshToken}`
+  };
+
   const pagination: TablePaginationConfig = {
     pageSize: 5,
   };
-  const [users, setUsers] = useState<User[]>();
-  const [query, setQuery] = useState('');
+
+  const columns: ColumnsType<User> = [
+    {
+      title: '番号順',
+      dataIndex: 'key',
+      key: 'key',
+      defaultSortOrder: 'ascend'
+    },
+    {
+      title: 'ユーザー名',
+      dataIndex: 'username',
+      key: 'username',
+    },
+    {
+      title: 'メール',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      width: 360,
+      render: (text, record) => ( // Add the `text` and `record` parameters
+        <Space size="middle">
+          <a onClick={() => handleAccept(record)}>アクセプト</a> {/* Add onClick event handler */}
+          <a onClick={() => handleBlock(record)}>ブロック</a> {/* Add onClick event handler */}
+        </Space>
+      ),
+    },
+  ];
+
+  const tableLocale = {
+    emptyText: 'User Not Found',
+  };
+
 
   const onSearch = (value: any) => {
     console.log(value);
     setQuery(value);
   }
+
+  const handleAccept = async (user: User) => {
+    try {
+      const response = await axios.put(`http://localhost:3008/api/user/admin/update/${user.ID}`, { status: 'ACTIVE' }, { headers });
+      console.log(response.data);
+      // Perform any additional actions after successful update
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+  };
+
+  const handleBlock = async (user: User) => {
+    try {
+      const response = await axios.put(`http://localhost:3008/api/user/admin/update/${user.ID}`, { status: 'INACTIVE' }, { headers });
+      console.log(response.data);
+      // Perform any additional actions after successful update
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+  };
+
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -63,8 +96,7 @@ const UserManage: React.FC<Props> = () => {
   useEffect(() => {
     const fetchUsersBySearch = async () => {
       const usersFound = await userApi.searchUserByName(query);
-      console.log(usersFound);
-
+      setUsers(usersFound);
     }
     fetchUsersBySearch();
   }, [query])
@@ -82,7 +114,7 @@ const UserManage: React.FC<Props> = () => {
           <Input.Search placeholder="ユーザー名" allowClear onSearch={onSearch} enterButton className="m-auto" />
         </div>
         <>
-          <Table columns={columns} dataSource={users} pagination={pagination} />
+          <Table columns={columns} dataSource={users} pagination={pagination} locale={tableLocale} />
         </>
       </div>
     </div>

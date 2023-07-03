@@ -23,7 +23,7 @@ const userApi = {
         }
     },
 
-    searchUserByName: async (query: any): Promise<{ users: User[] }> => {
+    searchUserByName: async (query: any) => {
         try {
             const headers = {
                 Authorization: `Bearer ${refreshToken}`
@@ -32,7 +32,13 @@ const userApi = {
                 params: { name: query },
                 headers: headers
             });
-            return response.data;
+            const userData = response.data.users.map((user: any, index: number) => ({
+                key: String(index + 1),
+                ID: user.id,
+                username: user.name,
+                email: user.email,
+            }));
+            return userData;
         } catch (error) {
             throw error;
         }
