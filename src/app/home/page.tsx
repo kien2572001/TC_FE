@@ -141,6 +141,9 @@ const Home = (props: Props) => {
       }
       case 'rating': {
         filteredFoods = foodRef.current.filter(food => food.rating >= 4);
+        filteredFoods.sort(function (a, b) {
+          return b.rating - a.rating;
+        });
         break;
       }
       case 'cheap': {
