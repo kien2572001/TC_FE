@@ -17,9 +17,9 @@ import axiosJWT from "@/api/axiosJWT";
 
 const UsersTable = ({ data, rerenderTable }: Props) => {
   const columns: ColumnsType<DataType> = [
-    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "名前", dataIndex: "name", key: "name" },
     {
-      title: "Email",
+      title: "メール",
       dataIndex: "",
       key: "email",
       render: (record) => (
@@ -27,7 +27,7 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
       ),
     },
     {
-      title: "Action",
+      title: "アクション",
       dataIndex: "",
       key: "action",
       render: (record) => (
@@ -38,13 +38,13 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
                 className="text-blue-500 cursor-pointer"
                 onClick={() => acceptUser(record.key)}
               >
-                Accept
+                アクセプト
               </span>
               <span
                 className="text-green-500 cursor-pointer"
                 onClick={() => rejectUser(record.key)}
               >
-                Reject
+                拒否
               </span>
             </div>
           ) : (
@@ -54,14 +54,14 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
                   className="text-green-500 cursor-pointer"
                   onClick={() => rejectUser(record.key)}
                 >
-                  Block
+                  ブロック
                 </span>
               ) : (
                 <span
                   className="text-blue-500 cursor-pointer"
                   onClick={() => acceptUser(record.key)}
                 >
-                  Unblock
+                  ブロック解除
                 </span>
               )}
             </>
@@ -105,28 +105,6 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
     <>
       <Table
         columns={columns}
-        // expandable={{
-        //   expandedRowRender: (record) => (
-        //     <div style={{ padding: "10px" }}>
-        //       <div className="flex space-x-2 h-[100px]">
-        //         <div className="h-full">
-        //           <img src={record.image} alt="" className="h-full" />
-        //         </div>
-        //         <div className="h-full ml-4">
-        //           <p>
-        //             <span className="font-bold">Price: </span> {record.price}{" "}
-        //             VND
-        //           </p>
-        //           <p>
-        //             <span className="font-bold">Description: </span>{" "}
-        //             {record.description}
-        //           </p>
-        //         </div>
-        //       </div>
-        //     </div>
-        //   ),
-        //   rowExpandable: (record) => record.name !== "Not Expandable",
-        // }}
         dataSource={data}
       />
     </>

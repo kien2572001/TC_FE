@@ -20,19 +20,19 @@ import axiosJWT from "@/api/axiosJWT";
 
 const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const columns: ColumnsType<DataType> = [
-    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "名前", dataIndex: "name", key: "name" },
     {
-      title: "Link",
+      title: "リンク",
       dataIndex: "",
       key: "link",
       render: (record) => (
         <div onClick={() => navigateTo(record.link)}>
-          <span className="text-blue-500 cursor-pointer">View</span>
+          <span className="text-blue-500 cursor-pointer">表示</span>
         </div>
       ),
     },
     {
-      title: "Action",
+      title: "アクション",
       dataIndex: "",
       key: "action",
       render: (record) => (
@@ -43,13 +43,13 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
                 className="text-blue-500 cursor-pointer"
                 onClick={() => acceptFood(record.key)}
               >
-                Accept
+                アクセプト
               </span>
               <span
                 className="text-green-500 cursor-pointer"
                 onClick={() => rejectFood(record.key)}
               >
-                Reject
+                拒否
               </span>
             </div>
           ) : (
@@ -59,14 +59,14 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
                   className="text-green-500 cursor-pointer"
                   onClick={() => rejectFood(record.key)}
                 >
-                  Block
+                  ブロック
                 </span>
               ) : (
                 <span
                   className="text-blue-500 cursor-pointer"
                   onClick={() => acceptFood(record.key)}
                 >
-                  Unblock
+                  ブロック解除
                 </span>
               )}
             </>
@@ -119,11 +119,11 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
                 </div>
                 <div className="h-full ml-4">
                   <p>
-                    <span className="font-bold">Price: </span> {record.price}{" "}
+                    <span className="font-bold">価格: </span> {record.price}{" "}
                     VND
                   </p>
                   <p>
-                    <span className="font-bold">Description: </span>{" "}
+                    <span className="font-bold">説明: </span>{" "}
                     {record.description}
                   </p>
                 </div>

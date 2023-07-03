@@ -7,6 +7,7 @@ import { Card, Empty } from "antd";
 import { Rate } from "antd";
 import { useRouter } from "next/navigation";
 import { StarFilled } from "@ant-design/icons";
+import Link from "next/link";
 
 const { Meta } = Card;
 
@@ -26,14 +27,14 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
     return <p>料理が見つかりませんでした.</p>;
   }
 
-
   return (
     <div className="flex overflow-x-scroll pt-[10px] pb-[10px]">
       {foods.map((food) => (
-        <div
-          className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px]"
+        <Link
+          href={`/food/${food.id}`}
+          className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px] text-decoration-none"
           key={food.id}
-          onClick={() => navigateToFoodDetail(food.id)}
+          style={{ textDecoration: "none" }}
         >
           <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
             <StarFilled /> {Number.parseFloat(food.rating).toFixed(1)}
@@ -52,7 +53,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
               {food.price}VND
             </p>
           </div>
-        </div>
+        </Link>
       ))}
       {foods && foods.length === 0 && (
         <div className="flex justify-center foods-center w-full h-full">
@@ -60,7 +61,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
         </div>
       )}
     </div>
-  );g
+  );
 };
 
 export default FoodList;
