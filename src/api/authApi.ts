@@ -27,6 +27,7 @@ export const authApi = {
         localStorage.setItem("userAvatar", res.data.user.avatar)
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
+        localStorage.setItem("userEmail", res.data.user.email)
       }
       return 1;
     } catch (error) { }
