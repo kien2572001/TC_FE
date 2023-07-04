@@ -39,7 +39,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
           {/* <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
             <StarFilled /> {Number.parseFloat(food.rating).toFixed(1)}
           </div> */}
-          <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
+          <div className="p-[10px] h-[300px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
             <div className="h-[170px] w-full overflow-hidden ">
               <img
@@ -49,6 +49,7 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
               />
             </div>
             <h5 className="font-bold my-2 ">{food.name}</h5>
+            <h6 className="font-bold my-2 opacity-70">{food.restaurant}</h6>
             <p className="text-[#FF7918] font-bold text-base mt-2 leading-none">
               {food.price}VND
             </p>

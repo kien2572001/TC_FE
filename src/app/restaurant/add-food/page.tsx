@@ -99,8 +99,8 @@ const AddFoodPage: React.FC<Props> = () => {
         isDraft: false,
       });
       if (response?.status === 201) {
-        successMessage();
-        router.push("/food/" + response?.data?.food?.id);
+        window.location.reload();
+        // router.push("/food/" + response?.data?.food?.id);
       }
     } catch (error) {
       errorMessage();
@@ -171,14 +171,14 @@ const AddFoodPage: React.FC<Props> = () => {
           </Form.Item>
 
           <Form.Item
-            label={<span className="font-bold text-lg">Restaurant ID</span>}
+            label={<span className="font-bold text-lg">レストラン名</span>}
             name="restaurantId"
             rules={[
               {
                 required: true,
                 message: (
                   <span className="text-red-500 text-xs">
-                    Restaurant IDを入力してください
+                    レストラン名を入力してください
                   </span>
                 ),
               },

@@ -76,7 +76,8 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
       if (res.status === 201) {
         successMessage();
         //push to home page
-        router.push("/restaurant/" + res.data.id);
+        window.location.reload();
+        // router.push("/restaurant/" + res.data.id);
       } else {
         errorMessage();
       }
@@ -165,6 +166,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
             <TimePicker.RangePicker
               format="HH:mm"
               value={[fromTime, toTime]}
+              placeholder={['開始時間', '終了時間']} 
               onChange={(value) => {
                 handleFromTimeChange(value[0]);
                 handleToTimeChange(value[1]);

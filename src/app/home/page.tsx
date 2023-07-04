@@ -165,8 +165,8 @@ const Home = (props: Props) => {
         <RestaurantList restaurantsData={restaurants} />
       </div>
       <div className="flex max-w-[1200px] 2xl:max-w-[1500px] m-auto p-[30px] flex-col shadow-md shadow-gray rounded-md max-h-[500px] space-y-[10px] bg-white">
-        <div className="flex place-content-between border-solid border-gray border-0 border-b-[1px]">
-          <h1 className="leading-none">おすすめ料理</h1>
+        <div className="flex border-solid border-gray border-0 border-b-[1px]">
+          <h1 className="leading-none mr-[10px]">おすすめ料理</h1>
           <Filter
           />
         </div>
