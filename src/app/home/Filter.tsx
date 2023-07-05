@@ -1,47 +1,78 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Button, Space } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilterValue } from "@/features/slices/filterSlice";
+import { RootState } from "@/store";
 
-type FilterProps = {
-  onFilterChange: (value: string) => void;
-};
 
-const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
+const Filter: React.FC = () => {
+  const dispatch = useDispatch();
+  const [activeButton, setActiveButton] = useState<number | null>(null);
+  const filterValue = useSelector((state: RootState) => state.filter.filterValue);
+
   const handleOptionChange = (value: string) => {
-    onFilterChange(value);
+    dispatch(setFilterValue(value)); // Dispatch the action with the value
   };
 
+  const handleButtonClick = (index: number, value: string) => {
+    if (activeButton === index) {
+      // Button is already active, deactivate it
+      setActiveButton(null);
+    } else {
+      // Button is inactive, activate it
+      setActiveButton(index);
+      handleOptionChange(value); // Call the handleOptionChange function
+    }
+  };
+
+  useEffect(() => {
+    if (filterValue === 'all') {
+      setActiveButton(0)
+    }
+  }, [filterValue])
+
   return (
-    <div className="flex space-x-4 m-auto">
-      <input
-        type="button"
-        value={"All"}
-        className="bg-white p-[10px] w-[50px] h-[40px]"
-        onClick={() => handleOptionChange("All")}
-      />
-      <input
-        type="button"
-        value={"Foods"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Foods")}
-      />
-      <input
-        type="button"
-        value={"Food"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Drinks")}
-      />
-      <input
-        type="button"
-        value={"Rating"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Rating")}
-      />
-      <input
-        type="button"
-        value={"Cheap"}
-        className="bg-white p-[10px] w-[70px] h-[40px]"
-        onClick={() => handleOptionChange("Cheap")}
-      />
-    </div>
+    <Space wrap>
+      <Button
+        size="large"
+        onClick={() => handleButtonClick(0, "all")} // Pass the value as "all"
+        type={activeButton === 0 ? "primary" : "default"}
+      >
+        全て
+      </Button>
+      <Button
+        size="large"
+        value={"food"}
+        onClick={() => handleButtonClick(1, "food")} // Pass the value as "food"
+        type={activeButton === 1 ? "primary" : "default"}
+      >
+        食べ物
+      </Button>
+      <Button
+        size="large"
+        value={"drink"}
+        onClick={() => handleButtonClick(2, "drink")} // Pass the value as "drink"
+        type={activeButton === 2 ? "primary" : "default"}
+      >
+        飲み物
+      </Button>
+      <Button
+        size="large"
+        value={"rating"}
+        onClick={() => handleButtonClick(3, "rating")} // Pass the value as "rating"
+        type={activeButton === 3 ? "primary" : "default"}
+      >
+        評価
+      </Button>
+      <Button
+        size="large"
+        value={"cheap"}
+        onClick={() => handleButtonClick(4, "cheap")} // Pass the value as "cheap"
+        type={activeButton === 4 ? "primary" : "default"}
+      >
+        安い
+      </Button>
+    </Space>
   );
 };
 

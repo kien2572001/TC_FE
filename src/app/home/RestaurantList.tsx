@@ -1,46 +1,70 @@
 import React, { useEffect, useState } from "react";
 import homeApi from "../../api/homeApi";
 import { Restaurant } from "../../models/home";
+import { Card } from "antd";
+import { Rate, Empty } from "antd";
+import { useRouter } from "next/navigation";
+import { StarFilled } from "@ant-design/icons";
+import Link from "next/link";
+
+const { Meta } = Card;
 
 const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>(restaurantsData);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchRestaurants = async () => {
-  //     try {
-  //       const response = await homeApi.getRestaurantsAll();
-  //       setRestaurants(response);
-  //     } catch (error) {
-  //       console.error("Failed to fetch restaurants:", error);
-  //     }
-  //   };
-  //   fetchRestaurants();
-  // }, []);
+  useEffect(() => {
+    setRestaurants(restaurantsData);
+  }, [restaurantsData]);
 
   if (!restaurants || restaurants.length === 0) {
-    return <p>No restaurants found.</p>;
+    return <p>レストランが見つかりませんでした.</p>;
   }
 
   return (
-    <div className="flex overflow-x-scroll">
+    <div className="flex overflow-x-scroll pt-[10px] pb-[20px]">
       {restaurants.map((restaurant) => (
-        <div
+        <Link
+          href={`/restaurant/${restaurant.id}`}
           key={restaurant.id}
-          className="flex m-auto flex-col border-[1px] border-black border-solid p-[10px] mx-[30px] my-[20px]"
+          style={{ textDecoration: "none" }}
+          className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px] text-decoration-none"
+          /* onClick={() => navigateToRestaurantDetail(restaurant.id)} */
         >
-          <div className="flex m-auto w-[150px] h-[170px]">
-            <img
-              className="w-full h-full"
-              src={restaurant.photoUrl}
-              alt="restaurant img"
+          {/* <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
+            <StarFilled /> {Number.parseFloat(restaurant.rating).toFixed(1)}
+          </div> */}
+          <div className="p-[10px] h-[250px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
+            {/* Nội dung */}
+            <div className="h-[170px] w-full overflow-hidden">
+              <img
+                src={
+                  !restaurant.photoUrl
+                    ? "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+                    : restaurant.photoUrl
+                }
+                alt="food"
+                className="w-full h-fit"
+              />
+            </div>
+            <h5 className="font-bold my-2 text-decoration-none">
+              {restaurant.name}
+            </h5>
+            <Rate
+              disabled
+              allowHalf
+              defaultValue={Number.parseFloat(restaurant.rating)}
+              value={Number.parseFloat(restaurant.rating)}
             />
+            <span className="pl-[4px] pb-[20px]">({restaurant.rating})</span>
           </div>
-          <div className="flex m-auto flex-col">
-            <h2>{restaurant.name}</h2>
-            <span className="align-middle items-center">rating</span>
-          </div>
-        </div>
+        </Link>
       ))}
+      {restaurants?.length === 0 && (
+        <div className="flex justify-center restaurants-center w-full h-full">
+          <Empty className="mt-5" description=" No restaurants found." />
+        </div>
+      )}
     </div>
   );
 };

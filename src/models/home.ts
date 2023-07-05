@@ -5,6 +5,7 @@ export interface Restaurant {
     photoUrl: string;
     active_time: string;
     is_draft: boolean;
+    rating: number;
 }
 
 export interface Food {
@@ -12,6 +13,8 @@ export interface Food {
     name: string;
     price: number;
     photoUrl: string;
+    restaurant: string;
     is_draft: boolean;
-    is_food: boolean;
+    isFood: boolean;
+    rating: number;
 }
