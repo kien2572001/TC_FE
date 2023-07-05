@@ -37,4 +37,4 @@ jobs:
             sudo docker stop tc_fe_app || true
             sudo docker rm tc_fe_app || true
             sudo docker pull kien2572001/tc_fe_app:latest
-            sudo docker run -d -p 3001:3000 --name tc_fe_app kien2572001/tc_fe_app:latest
+            sudo docker run -d -p 3000:3000 --name tc_fe_app kien2572001/tc_fe_app:latest
