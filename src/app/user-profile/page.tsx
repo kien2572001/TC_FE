@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Form, Input, Button } from "antd";
-import axios from "axios";
+import axios from "@/api/axiosJWT";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";

@@ -5,7 +5,7 @@ import { Button, Form, Input, Radio, TimePicker, Col, message } from "antd";
 import UploadImage from "../UploadImage";
 import { Store } from "antd/lib/form/interface";
 import dayjs from "dayjs";
-import axios from "axios";
+import axios from "@/api/axiosJWT";
 import { useRouter } from "next/navigation";
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];

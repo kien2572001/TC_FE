@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import axios from "axios";
+import axios from "@/api/axiosJWT";
 import { Rate, Empty } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import ReviewModal from "@/common/ReviewModal";
