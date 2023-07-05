@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
@@ -18,12 +18,7 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const publicRoutes = [
-    "/register",
-    "/login",
-    "/home",
-    "/restaurant/[id]",
-  ];
+  const publicRoutes = ["/register", "/login", "/home", "/restaurant/[id]"];
   const routesWithoutHeaderFooter = [
     "/login",
     "/register",
@@ -33,7 +28,7 @@ export default function RootLayout({
 
   const adminRoutes = ["/admin"];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       !localStorage.getItem("refreshToken") &&
       !publicRoutes.includes(pathname)

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store";
@@ -20,8 +20,28 @@ export default function Header() {
   const imgSrc =
     "https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg";
   const [selectedItem, setSelectedItem] = useState("");
-  const nameParts = localStorage.getItem("userName")?.split(" ");
-  const userName = nameParts ? nameParts[nameParts.length - 1] : "";
+
+  useLayoutEffect(() => {
+    let tempUserAvatar = localStorage.getItem("userAvatar");
+    let tempUserName = localStorage.getItem("userName");
+    if (localStorage) {
+      setAvatar(tempUserAvatar ? tempUserAvatar : "");
+      setName(tempUserName ? tempUserName : "");
+      setNameParts(tempUserName ? tempUserName.split(" ") : []);
+      setIsClient(true);
+    }
+  }, []);
+
+  //const nameParts = localStorage.getItem("userName")?.split(" ");
+  // const userAvatar = localStorage.getItem("userAvatar");
+  // const userName = nameParts ? nameParts[nameParts.length - 1] : "";
+
+  const [nameParts, setNameParts] = useState<string[]>([]);
+  const [userAvatar, setAvatar] = useState("");
+  const [userName, setName] = useState("");
+
+  const [isClient, setIsClient] = useState(false);
+
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -80,8 +100,6 @@ export default function Header() {
     },
   ];
 
-  const userAvatar = localStorage.getItem("userAvatar");
-
   const onSearch = (value: string) => {
     dispatch(setSearchValue(value));
     dispatch(setFilterValue("all"));
@@ -121,7 +139,9 @@ export default function Header() {
 
       case "Logout":
         {
-          localStorage.clear();
+          if (typeof window !== undefined) {
+            localStorage.clear();
+          }
           router.push("/login");
         }
         break;
@@ -131,49 +151,60 @@ export default function Header() {
     }
   };
 
-    return (
-        <div className="flex flex-row space-x-3">
-            {
-                pathName !== '/login' &&
-                (
-                    <div className="p-[10px] w-full flex flex-row m-auto justify-between" >
-                        <div className="" style={ {padding: "15px"} }>
-                        <Link href='/home' className="m-auto text-black" style={{textDecoration: "none"}}>
-                            <span className="leading-none text-[30px] text-[#333] " style={{fontSize: "30px", color: "#333"}}>TC</span>
-                        </Link>
-                        </div>
-                        <div>
-                        <Search 
-                            placeholder="検索" 
-                            enterButton 
-                            onSearch={onSearch} 
-                            onChange={onChange} 
-                            className="m-auto"    
-                            style={{ minWidth: 300 , paddingTop: "15px", width: "100%"}}
-                        />
-                        </div>
-                        <div className="mr-[30px]">
-                        {
-                            localStorage.getItem('accessToken') ? (
-                                <Dropdown menu={{ items }} placement="bottomRight" arrow className="">
-                                    <Space>
-                                        <Avatar src={userAvatar} size={50} />
-                                        <span>{userName}</span>
-                                    </Space>
-                                </Dropdown>
-                            )
-                                : (
-                                    <Avatar style={{ cursor: 'pointer' }} size={40} icon={<UserOutlined />}
-                                        onClick={() => {
-                                            router.push('/login');
-                                        }} />
-                                )
-                        }
-                        </div>
-                    </div>
-                )
-            }
-
+  return (
+    <div className="flex flex-row space-x-3">
+      {pathName !== "/login" && (
+        <div className="p-[10px] w-full flex flex-row m-auto justify-between">
+          <div className="" style={{ padding: "15px" }}>
+            <Link
+              href="/home"
+              className="m-auto text-black"
+              style={{ textDecoration: "none" }}
+            >
+              <span
+                className="leading-none text-[30px] text-[#333] "
+                style={{ fontSize: "30px", color: "#333" }}
+              >
+                TC
+              </span>
+            </Link>
+          </div>
+          <div>
+            <Search
+              placeholder="検索"
+              enterButton
+              onSearch={onSearch}
+              onChange={onChange}
+              className="m-auto"
+              style={{ minWidth: 300, paddingTop: "15px", width: "100%" }}
+            />
+          </div>
+          <div className="mr-[30px]">
+            {isClient ? (
+              <Dropdown
+                menu={{ items }}
+                placement="bottomRight"
+                arrow
+                className=""
+              >
+                <Space>
+                  <Avatar src={userAvatar} size={50} />
+                  <span>{userName}</span>
+                </Space>
+              </Dropdown>
+            ) : (
+              <Avatar
+                style={{ cursor: "pointer" }}
+                size={40}
+                icon={<UserOutlined />}
+                onClick={() => {
+                  router.push("/login");
+                }}
+              />
+            )}
+          </div>
         </div>
+      )}
+    </div>
   );
 }
