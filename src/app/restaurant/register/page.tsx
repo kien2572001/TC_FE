@@ -62,7 +62,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
   const handleCreateRestaurant = async () => {
     try {
       await form.validateFields();
-      const res = await axios.post("http://localhost:3008/api/restaurants", {
+      const res = await axios.post("http://13.212.172.169:3008/api/restaurants", {
         name: restaurantName,
         address: restaurantAddress,
         activeTime: fromTime?.format("HH:mm") + "-" + toTime?.format("HH:mm"),
@@ -168,7 +168,9 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
               value={[fromTime, toTime]}
               placeholder={['開始時間', '終了時間']} 
               onChange={(value) => {
+                //@ts-ignore
                 handleFromTimeChange(value[0]);
+                //@ts-ignore
                 handleToTimeChange(value[1]);
                 console.log(value);
               }}

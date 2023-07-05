@@ -29,11 +29,7 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
           key={restaurant.id}
           style={{ textDecoration: "none" }}
           className="mx-4 mt-4 relative hover:scale-105 transition-all duration-300 flex-[1_0_20%] max-w-[230px] text-decoration-none"
-          /* onClick={() => navigateToRestaurantDetail(restaurant.id)} */
         >
-          {/* <div className="absolute top-5 left-[-0.75rem] bg-[#FF903F] text-white font-bold text-xs p-2 z-20 rounded ">
-            <StarFilled /> {Number.parseFloat(restaurant.rating).toFixed(1)}
-          </div> */}
           <div className="p-[10px] h-[250px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
             <div className="h-[170px] w-full overflow-hidden">
@@ -53,8 +49,7 @@ const RestaurantList = ({ restaurantsData }: { restaurantsData: any }) => {
             <Rate
               disabled
               allowHalf
-              defaultValue={Number.parseFloat(restaurant.rating)}
-              value={Number.parseFloat(restaurant.rating)}
+              value={restaurant.rating}
             />
             <span className="pl-[4px] pb-[20px]">({restaurant.rating})</span>
           </div>

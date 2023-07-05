@@ -19,7 +19,7 @@ const FoodDetail = () => {
   const fetchFoodReviews = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://localhost:3008/api/foods/detail/reviews/" + id
+        "http://13.212.172.169:3008/api/foods/detail/reviews/" + id
       );
       setReviews(response.data.reviews);
     } catch (error) {
@@ -30,7 +30,7 @@ const FoodDetail = () => {
   const fetchFoodDetail = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://localhost:3008/api/foods/detail/" + id
+        "http://13.212.172.169:3008/api/foods/detail/" + id
       );
       setFood(response.data.food);
     } catch (error) {
@@ -112,8 +112,11 @@ const FoodDetail = () => {
             />
           </div>
           <div className="flex  flex-col p-4">
-            {reviews?.map((item) => (
-              <div className="mb-3 p-[10px] w-full text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden cursor-pointer rounded-md border border-orange-200 border-solid flex ">
+            {reviews?.map((item, key) => (
+              <div
+                className="mb-3 p-[10px] w-full text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden cursor-pointer rounded-md border border-orange-200 border-solid flex "
+                key={key}
+              >
                 {/* Nội dung */}
                 <img
                   src={item.userAvatar}

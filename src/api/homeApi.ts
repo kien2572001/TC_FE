@@ -6,7 +6,7 @@ import { Restaurant, Food } from "../models/home";
 const homeApi = {
   getRestaurantsAll: async (): Promise<{ restaurants: Restaurant[] }> => {
     try {
-      const res = await axios.get(`http://localhost:3008/api/restaurants/all`);
+      const res = await axios.get(`http://13.212.172.169:3008/api/restaurants/all`);
       return res.data;
     } catch (err) {
       throw err;
@@ -14,7 +14,7 @@ const homeApi = {
   },
   getFoodAll: async (): Promise<{ foods: Food[] }> => {
     try {
-      const response = await axios.get(`http://localhost:3008/api/foods/all`);
+      const response = await axios.get(`http://13.212.172.169:3008/api/foods/all`);
       return response.data;
     } catch (error) {
       throw error;
@@ -22,7 +22,7 @@ const homeApi = {
   },
   searchByKeyword: async (keyword: string): Promise<{ restaurant: Restaurant[]; food: Food[] }> => {
     try {
-      const response = await axios.get(`http://localhost:3008/api/search`, {
+      const response = await axios.get(`http://13.212.172.169:3008/api/search`, {
         params: {
           keyword: keyword
         }

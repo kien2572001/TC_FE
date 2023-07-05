@@ -74,7 +74,7 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
   const acceptUser = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/user/admin/update/" + id,
+        "http://13.212.172.169:3008/api/user/admin/update/" + id,
         {
           status: "ACTIVE",
         }
@@ -88,7 +88,7 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
   const rejectUser = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/user/admin/update/" + id,
+        "http://13.212.172.169:3008/api/user/admin/update/" + id,
         {
           status: "BLOCKED",
         }
