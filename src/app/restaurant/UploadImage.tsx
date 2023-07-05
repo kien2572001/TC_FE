@@ -47,10 +47,12 @@ const UploadImage: React.FC<Props> = ({ image, setImage }) => {
     customRequest: async ({ file, onSuccess, onError }) => {
       try {
         const image = await uploadImageAPI(file);
+        //@ts-ignore
         onSuccess(null, file);
         setImage(image.url); 
       } catch (error) {
         console.log(error);
+        //@ts-ignore
         onError(error);
       }
     },
@@ -61,7 +63,7 @@ const UploadImage: React.FC<Props> = ({ image, setImage }) => {
     const data = new FormData();
     data.append("file", file);
     const res = await fetch(
-      "http://localhost:3008/api/upload-cloudinary/image",
+      "http://13.212.172.169:3008/api/upload-cloudinary/image",
       {
         method: "POST",
         body: data,

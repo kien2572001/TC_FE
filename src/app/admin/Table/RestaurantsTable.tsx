@@ -80,7 +80,7 @@ const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const acceptRestaurant = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/restaurants/admin/update/" + id,
+        "http://13.212.172.169:3008/api/restaurants/admin/update/" + id,
         {
           status: "ACTIVE",
         }
@@ -94,7 +94,7 @@ const RestaurantsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const rejectRestaurant = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/restaurants/admin/update/" + id,
+        "http://13.212.172.169:3008/api/restaurants/admin/update/" + id,
         {
           status: "BLOCKED",
         }

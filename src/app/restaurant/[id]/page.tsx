@@ -23,7 +23,7 @@ const RestaurantDetail = () => {
   const fetchMenu = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://localhost:3008/api/restaurants/detail/menu/" + id
+        "http://13.212.172.169:3008/api/restaurants/detail/menu/" + id
       );
       console.log(response.data.foods);
       setMenu(response.data.foods);
@@ -35,7 +35,7 @@ const RestaurantDetail = () => {
   const fetchReviews = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://localhost:3008/api/restaurants/detail/reviews/" + id
+        "http://13.212.172.169:3008/api/restaurants/detail/reviews/" + id
       );
       console.log(response.data.reviews);
       setReviews(response.data.reviews);
@@ -47,7 +47,7 @@ const RestaurantDetail = () => {
   const fetchRestaurantDetail = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://localhost:3008/api/restaurants/detail/" + id
+        "http://13.212.172.169:3008/api/restaurants/detail/" + id
       );
       console.log(response.data);
       setRestaurant(response.data);

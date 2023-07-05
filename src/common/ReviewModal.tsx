@@ -38,8 +38,8 @@ const ReviewModal = ({ name, id, updateComment, type }: ReviewModalProps) => {
     try {
       const apiURL =
         type === "restaurant"
-          ? "http://localhost:3008/api/reviews/restaurants/" + id
-          : "http://localhost:3008/api/reviews/foods/" + id;
+          ? "http://13.212.172.169:3008/api/reviews/restaurants/" + id
+          : "http://13.212.172.169:3008/api/reviews/foods/" + id;
       const response = await axiosJWT.post(apiURL, {
         rate: rating,
         content: reviewContent,

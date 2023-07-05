@@ -8,7 +8,7 @@ type Props = {};
 const TestToken = (props: Props) => {
   const callAPI = async () => {
     try {
-      const res = await axiosJWT.get("http://localhost:3008/api/user/all");
+      const res = await axiosJWT.get("http://13.212.172.169:3008/api/user/all");
       console.log("res: ", res);
     } catch (error) {
       console.log("error: ", error);

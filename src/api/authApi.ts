@@ -7,7 +7,7 @@ export const authApi = {
   register: async (registerUser: RegisterUser) => {
     try {
       const res = await axios.post(
-        "http://localhost:3008/api/user/register",
+        "http://13.212.172.169:3008/api/user/register",
         registerUser
       );
       return res.data;
@@ -19,7 +19,7 @@ export const authApi = {
       process.env.NEXT_PUBLIC_REFRESH_TOKEN_EXPIRES_IN;
     try {
       const res = await axios.post(
-        "http://localhost:3008/api/user/login",
+        "http://13.212.172.169:3008/api/user/login",
         userLogin
       );
       if (res && res.data) {
@@ -36,7 +36,7 @@ export const authApi = {
   refreshToken: async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3008/api/user/refresh-token",
+        "http://13.212.172.169:3008/api/user/refresh-token",
         {
           refreshToken: localStorage.getItem("refreshToken"),
         }

@@ -1,11 +1,9 @@
 import React from "react";
-
 type Props = {
   data: any[];
   rerenderTable: () => void;
   navigateTo: (url: string) => void;
 };
-import Link from "next/link";
 interface DataType {
   key: React.Key;
   name: string;
@@ -79,7 +77,7 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const acceptFood = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/foods/admin/update/" + id,
+        "http://13.212.172.169:3008/api/foods/admin/update/" + id,
         {
           status: "ACTIVE",
         }
@@ -93,7 +91,7 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const rejectFood = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://localhost:3008/api/foods/admin/update/" + id,
+        "http://13.212.172.169:3008/api/foods/admin/update/" + id,
         {
           status: "BLOCKED",
         }

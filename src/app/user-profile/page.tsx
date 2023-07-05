@@ -35,7 +35,7 @@ const UserProfile: React.FC<Props> = () => {
                     Authorization: `Bearer ${refreshToken}`
                 };
 
-                const response = await axios.get('http://localhost:3008/api/user/profile', { headers });
+                const response = await axios.get('http://13.212.172.169:3008/api/user/profile', { headers });
                 const userData = response.data.user;
                 setAvatarImage(userData.avatar);
                 setUserName(userData.name);
@@ -90,12 +90,13 @@ const UserProfile: React.FC<Props> = () => {
         const fetchAvatarUrl = async () => {
             try {
                 const uploadResponse = await axios.post(
-                    "http://localhost:3008/api/upload-cloudinary/image",
+                    "http://13.212.172.169:3008/api/upload-cloudinary/image",
                     formData // Passing the file directly, not the entire formData
                 );
 
                 console.log("Image upload response:", uploadResponse.data);
                 formData.append("avatar", uploadResponse.data.url);
+                //@ts-ignore
                 localStorage.setItem("userAvatar", formData.get('avatar'));
 
             } catch (error) {
@@ -112,11 +113,13 @@ const UserProfile: React.FC<Props> = () => {
                 Authorization: `Bearer ${refreshToken}`
             };
             formData.delete('file');
+            //@ts-ignore
             for (const [key, value] of formData.entries()) {
                 console.log(`${key}:`, value);
+                //@ts-ignore
                 formDataObject[key] = value;
             }
-            const response = await axios.put('http://localhost:3008/api/user/update', formDataObject, { headers });
+            const response = await axios.put('http://13.212.172.169:3008/api/user/update', formDataObject, { headers });
             console.log(response.data);
         }
 

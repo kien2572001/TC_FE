@@ -1,17 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Input } from "antd";
+import { Input, Menu } from "antd";
 import axiosJWT from "@/api/axiosJWT";
-
-const { Search } = Input;
+import { useRouter } from "next/navigation";
 import { TeamOutlined, ShopOutlined, CoffeeOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Menu } from "antd";
-
+import { MenuProps } from "antd";
 import RestaurantsTable from "./Table/RestaurantsTable";
 import UsersTable from "./Table/UsersTable";
 import FoodsTable from "./Table/FoodsTable";
-import { useRouter } from "next/navigation";
+
+const { Search } = Input;
 const items: MenuProps["items"] = [
   {
     label: "レストラン",
@@ -33,91 +31,80 @@ const items: MenuProps["items"] = [
 const AdminPage = () => {
   const [data, setData] = useState<any[]>([]);
   const router = useRouter();
+  const [current, setCurrent] = useState("restaurants");
 
   const navigateTo = (url: string) => {
     router.push(url);
   };
-
-  const [current, setCurrent] = useState("restaurants");
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
 
   useEffect(() => {
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    rerenderTable();
+    fetchData();
   }, [current]);
 
-  const fetch = async () => {
-    await getAllByKey();
-  };
-
-  const getAllByKey = async () => {
+  const fetchData = async () => {
     if (current === "restaurants") {
-      const res = await axiosJWT.get(
-        "http://localhost:3008/api/restaurants/admin/all"
-      );
-      console.log(res.data.restaurants);
-      let restaurants = res.data.restaurants;
-      restaurants = restaurants.map((restaurant: any) => {
-        return {
-          key: restaurant.id,
-          name: restaurant.name,
-          address: restaurant.address,
-          link: "http://localhost:3000/restaurant/" + restaurant.id,
-          status: restaurant.status,
-        };
-      });
-      setData(sortByStatus(restaurants));
+      const res = await getRestaurants();
+      setData(sortDataByStatus(res));
     } else if (current === "foods") {
-      const res = await axiosJWT.get(
-        "http://localhost:3008/api/foods/admin/all"
-      );
-      console.log(res.data.foods);
-      let foods = res.data.foods;
-      foods = foods.map((food: any) => {
-        return {
-          key: food.id,
-          name: food.name,
-          price: food.price,
-          link: "http://localhost:3000/food/" + food.id,
-          description: food.description,
-          status: food.status,
-          image: food.photoUrl ? food.photoUrl : "",
-        };
-      });
-      setData(sortByStatus(foods));
+      const res = await getFoods();
+      setData(sortDataByStatus(res));
     } else if (current === "users") {
-      const res = await axiosJWT.get(
-        "http://localhost:3008/api/user/admin/all"
-      );
-      console.log(res.data.users);
-      let users = res.data.users;
-      users = users.map((user: any) => {
-        return {
-          key: user.id,
-          name: user.name,
-          email: user.email,
-          status: user.status,
-          avatar: user.avatar,
-        };
-      });
-      setData(sortByStatus(users));
+      const res = await getUsers();
+      setData(sortDataByStatus(res));
     }
   };
 
-  const sortByStatus = (data: any[]) => {
-    let itemWithActiveStatus = data.filter((item) => item.status === "ACTIVE");
-    let itemWithInactiveStatus = data.filter(
-      (item) => item.status === "INACTIVE"
+  const getRestaurants = async () => {
+    const res = await axiosJWT.get(
+      "http://13.212.172.169:3008/api/restaurants/admin/all"
     );
-    let itemWithBlockedStatus = data.filter(
-      (item) => item.status === "BLOCKED"
+    return res.data.restaurants.map((restaurant: any) => ({
+      key: restaurant.id,
+      name: restaurant.name,
+      address: restaurant.address,
+      link: "http://localhost:3000/restaurant/" + restaurant.id,
+      status: restaurant.status,
+    }));
+  };
+
+  const getFoods = async () => {
+    const res = await axiosJWT.get(
+      "http://13.212.172.169:3008/api/foods/admin/all"
     );
+    return res.data.foods.map((food: any) => ({
+      key: food.id,
+      name: food.name,
+      price: food.price,
+      link: "http://localhost:3000/food/" + food.id,
+      description: food.description,
+      status: food.status,
+      image: food.photoUrl ? food.photoUrl : "",
+    }));
+  };
+
+  const getUsers = async () => {
+    const res = await axiosJWT.get(
+      "http://13.212.172.169:3008/api/user/admin/all"
+    );
+    return res.data.users.map((user: any) => ({
+      key: user.id,
+      name: user.name,
+      email: user.email,
+      status: user.status,
+      avatar: user.avatar,
+    }));
+  };
+
+  const sortDataByStatus = (data: any[]) => {
+    const sortByStatus = (status: string) =>
+      data.filter((item) => item.status === status);
+    const itemWithInactiveStatus = sortByStatus("INACTIVE");
+    const itemWithActiveStatus = sortByStatus("ACTIVE");
+    const itemWithBlockedStatus = sortByStatus("BLOCKED");
 
     return [
       ...itemWithInactiveStatus,
@@ -126,89 +113,73 @@ const AdminPage = () => {
     ];
   };
 
-  const rerenderTable = () => {
-    fetch();
-  };
-
-  const onSearch = (value: string) => {
+  const onSearch = async (value: string) => {
     if (current === "restaurants") {
-      searchRestaurant(value);
+      const res = await searchRestaurant(value);
+      setData(sortDataByStatus(res));
     } else if (current === "foods") {
-      searchFood(value);
+      const res = await searchFood(value);
+      setData(sortDataByStatus(res));
     } else if (current === "users") {
-      searchUser(value);
+      const res = await searchUser(value);
+      setData(sortDataByStatus(res));
     }
   };
 
   const searchRestaurant = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://localhost:3008/api/restaurants/admin/search",
+      "http://13.212.172.169:3008/api/restaurants/admin/search",
       {
         params: {
           name: value,
         },
       }
     );
-    console.log(res.data.restaurants);
-    let restaurants = res.data.restaurants;
-    restaurants = restaurants.map((restaurant: any) => {
-      return {
-        key: restaurant.id,
-        name: restaurant.name,
-        address: restaurant.address,
-        link: "http://localhost:3000/restaurant/" + restaurant.id,
-        status: restaurant.status,
-      };
-    });
-    setData(sortByStatus(restaurants));
+    return res.data.restaurants.map((restaurant: any) => ({
+      key: restaurant.id,
+      name: restaurant.name,
+      address: restaurant.address,
+      link: "http://localhost:3000/restaurant/" + restaurant.id,
+      status: restaurant.status,
+    }));
   };
 
   const searchFood = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://localhost:3008/api/foods/admin/search",
+      "http://13.212.172.169:3008/api/foods/admin/search",
       {
         params: {
           name: value,
         },
       }
     );
-    console.log(res.data.foods);
-    let foods = res.data.foods;
-    foods = foods.map((food: any) => {
-      return {
-        key: food.id,
-        name: food.name,
-        price: food.price,
-        link: "http://localhost:3000/food/" + food.id,
-        description: food.description,
-        status: food.status,
-        image: food.photoUrl ? food.photoUrl : "",
-      };
-    });
-    setData(sortByStatus(foods));
+    return res.data.foods.map((food: any) => ({
+      key: food.id,
+      name: food.name,
+      price: food.price,
+      link: "http://localhost:3000/food/" + food.id,
+      description: food.description,
+      status: food.status,
+      image: food.photoUrl ? food.photoUrl : "",
+    }));
   };
 
   const searchUser = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://localhost:3008/api/user/admin/search",
+      "http://13.212.172.169:3008/api/user/admin/search",
       {
         params: {
           name: value,
         },
       }
     );
-    console.log(res.data.users);
-    let users = res.data.users;
-    users = users.map((user: any) => {
-      return {
-        key: user.id,
-        name: user.name,
-        email: user.email,
-        status: user.status,
-        avatar: user.avatar,
-      };
-    });
-    setData(sortByStatus(users));
+    return res.data.users.map((user: any) => ({
+      key: user.id,
+      name: user.name,
+      email: user.email,
+      status: user.status,
+      avatar: user.avatar,
+    }));
   };
 
   return (
@@ -236,15 +207,15 @@ const AdminPage = () => {
           {current === "restaurants" ? (
             <RestaurantsTable
               data={data}
-              rerenderTable={rerenderTable}
+              rerenderTable={fetchData}
               navigateTo={navigateTo}
             />
           ) : current === "users" ? (
-            <UsersTable data={data} rerenderTable={rerenderTable} />
+            <UsersTable data={data} rerenderTable={fetchData} />
           ) : (
             <FoodsTable
               data={data}
-              rerenderTable={rerenderTable}
+              rerenderTable={fetchData}
               navigateTo={navigateTo}
             />
           )}
