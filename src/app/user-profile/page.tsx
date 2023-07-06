@@ -83,6 +83,7 @@ const UserProfile: React.FC<Props> = () => {
   };
 
   const handleSubmit = async (values: any) => {
+    const { name, email, password } = values;
     const formData = new FormData();
     notify();
     if (avatarImage) {
@@ -92,12 +93,13 @@ const UserProfile: React.FC<Props> = () => {
       formData.append("file", file, "image.jpg");
     }
 
-    formData.append("name", values.name);
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-
+    formData.append("name", name);
+    formData.append("email", email);
+    if (password) {
+      formData.append("password", password);
+    }
     if (typeof window !== "undefined") {
-        localStorage.setItem("userName", values.name);
+      localStorage.setItem("userName", name);
     }
 
     // Upload the avatar file to the backend API
@@ -110,10 +112,10 @@ const UserProfile: React.FC<Props> = () => {
 
         console.log("Image upload response:", uploadResponse.data);
         formData.append("avatar", uploadResponse.data.url);
-        
+
         if (typeof window !== "undefined") {
-            //@ts-ignore
-            localStorage.setItem("userAvatar", formData.get("avatar"));
+          //@ts-ignore
+          localStorage.setItem("userAvatar", formData.get("avatar"));
         }
       } catch (error) {
         console.error("Image upload error:", error);
@@ -150,10 +152,10 @@ const UserProfile: React.FC<Props> = () => {
   };
 
   const [form] = Form.useForm();
-  const initialValues = {
-    name: userName,
-    email: userEmail,
-  };
+  // const initialValues = {
+  //   name: userName,
+  //   email: userEmail,
+  // };
 
   return (
     <div className="space-y-[10px] py-[20px] mb-[20px] bg-cover bg-[url('https://img.freepik.com/free-photo/blurred-corridor-with-chairs-tables_1203-166.jpg?w=740&t=st=1686197323~exp=1686197923~hmac=2e1b0a787055a1176f03ef10a7990945b584d6fd9d8d2ed6bec593905a190b28')]">
@@ -190,7 +192,7 @@ const UserProfile: React.FC<Props> = () => {
               layout="vertical"
               form={form}
               onFinish={handleSubmit}
-              initialValues={initialValues}
+            // initialValues={initialValues}
             >
               <Form.Item label="ユーザー名" name="name">
                 <Input placeholder="ユーザー名" />
