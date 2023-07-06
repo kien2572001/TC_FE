@@ -14,13 +14,13 @@ const Login = (props: Props) => {
     if (success) {
       messageApi.open({
         type: "success",
-        content: "Login success!",
+        content: "ログイン成功！",
       });
       router.push("/home");
     } else {
       messageApi.open({
         type: "error",
-        content: "Login fail!",
+        content: "ログイン失敗！",
       });
     }
   };
@@ -48,9 +48,9 @@ const Login = (props: Props) => {
             rules={[
               {
                 type: "email",
-                message: "The input is not valid E-mail!",
+                message: "入力が有効な電子メールではありません！",
               },
-              { required: true, message: "Please input your username!" },
+              { required: true, message: "ユーザー名を入力してください！" },
             ]}
           >
             <Input />
@@ -59,7 +59,7 @@ const Login = (props: Props) => {
           <Form.Item
             label="パスワード"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: "パスワードを入力してください！" }]}
           >
             <Input.Password />
           </Form.Item>

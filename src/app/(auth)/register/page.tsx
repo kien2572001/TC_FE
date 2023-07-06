@@ -12,13 +12,13 @@ const Register = (props: Props) => {
     if (success) {
       messageApi.open({
         type: "success",
-        content: "Register success!",
+        content: "登録成功！",
       });
       router.push("/login");
     } else {
       messageApi.open({
         type: "error",
-        content: "Register fail!",
+        content: "登録に失敗した！",
       });
     }
   };
@@ -41,24 +41,24 @@ const Register = (props: Props) => {
           layout="vertical"
         >
           <Form.Item
-            label="Username"
+            label="ユーザー名"
             name="name"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: "ユーザー名を入力してください！" }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label="Email"
+            label="Eメール"
             name="email"
             rules={[
               {
                 type: "email",
-                message: "The input is not valid E-mail!",
+                message: "入力が有効なEメールではありません！",
               },
               {
                 required: true,
-                message: "Please input your email!",
+                message: "Eメールを入力してください！",
               },
             ]}
           >
@@ -66,19 +66,19 @@ const Register = (props: Props) => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="パスワード"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: "パスワードを入力してください！" }]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item
-            label="Confirm Password"
+            label="パスワードの確認"
             name="confirmPassword"
             dependencies={["password"]}
             rules={[
-              { required: true, message: "Please confirm your password!" },
+              { required: true, message: "パスワードを確認してください！" },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue("password") === value) {
@@ -86,7 +86,7 @@ const Register = (props: Props) => {
                   }
                   return Promise.reject(
                     new Error(
-                      "The two passwords that you entered do not match!"
+                      "入力した2つのパスワードが一致しません！"
                     )
                   );
                 },
@@ -102,7 +102,7 @@ const Register = (props: Props) => {
                 validator: (_, value) =>
                   value
                     ? Promise.resolve()
-                    : Promise.reject(new Error("Should accept agreement")),
+                    : Promise.reject(new Error("合意を受け入れるべきである")),
               },
             ]}
             valuePropName="checked"
