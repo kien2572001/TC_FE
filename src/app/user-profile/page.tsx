@@ -55,8 +55,6 @@ const UserProfile: React.FC<Props> = () => {
         setUserName(userData.name);
         setUserEmail(userData.email);
 
-        console.log(userData);
-
         form.setFieldsValue({
           name: userData.name,
           email: userData.email,
@@ -109,8 +107,6 @@ const UserProfile: React.FC<Props> = () => {
           "https://tastingcuisine.kien2572001.tech/api/upload-cloudinary/image",
           formData // Passing the file directly, not the entire formData
         );
-
-        console.log("Image upload response:", uploadResponse.data);
         formData.append("avatar", uploadResponse.data.url);
 
         if (typeof window !== "undefined") {
@@ -132,17 +128,16 @@ const UserProfile: React.FC<Props> = () => {
       };
       formData.delete("file");
       //@ts-ignore
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-        //@ts-ignore
-        formDataObject[key] = value;
-      }
+      // for (const [key, value] of formData.entries()) {
+      //   console.log(`${key}:`, value);
+      //   //@ts-ignore
+      //   formDataObject[key] = value;
+      // }
       const response = await axios.put(
         "https://tastingcuisine.kien2572001.tech/api/user/update",
         formDataObject,
         { headers }
       );
-      console.log(response.data);
     };
 
     await updateProfile();

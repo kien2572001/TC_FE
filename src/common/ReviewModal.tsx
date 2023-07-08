@@ -45,7 +45,6 @@ const ReviewModal = ({ name, id, updateComment, type }: ReviewModalProps) => {
         content: reviewContent,
       });
       if (response.status === 201) {
-        console.log(response.data);
         updateComment(response.data);
         clearForm();
         message.success("レビューを書きました");

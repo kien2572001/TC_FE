@@ -25,7 +25,6 @@ const RestaurantDetail = () => {
       const response = await axios.get(
         "https://tastingcuisine.kien2572001.tech/api/restaurants/detail/menu/" + id
       );
-      console.log(response.data.foods);
       setMenu(response.data.foods);
     } catch (error) {
       console.log(error);
@@ -37,7 +36,6 @@ const RestaurantDetail = () => {
       const response = await axios.get(
         "https://tastingcuisine.kien2572001.tech/api/restaurants/detail/reviews/" + id
       );
-      console.log(response.data.reviews);
       setReviews(response.data.reviews);
     } catch (error) {
       console.log(error);
@@ -49,7 +47,6 @@ const RestaurantDetail = () => {
       const response = await axios.get(
         "https://tastingcuisine.kien2572001.tech/api/restaurants/detail/" + id
       );
-      console.log(response.data);
       setRestaurant(response.data);
     } catch (error) {
       console.log(error);
