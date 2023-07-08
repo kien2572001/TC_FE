@@ -29,11 +29,11 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
       : null;
 
   const onFinish = (values: Store) => {
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Form validation failed:", errorInfo);
+    // console.log("Form validation failed:", errorInfo);
   };
 
   const validateMessages = {
@@ -172,7 +172,6 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
                 handleFromTimeChange(value[0]);
                 //@ts-ignore
                 handleToTimeChange(value[1]);
-                console.log(value);
               }}
             />
           </Form.Item>

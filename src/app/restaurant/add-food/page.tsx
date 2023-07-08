@@ -64,11 +64,11 @@ const AddFoodPage: React.FC<Props> = () => {
       : null;
 
   const onFinish = (values: Store) => {
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Form validation failed:", errorInfo);
+    // console.log("Form validation failed:", errorInfo);
   };
 
   const validateMessages = {
@@ -107,9 +107,6 @@ const AddFoodPage: React.FC<Props> = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(foodPrice);
-  }, [foodPrice]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-blue-200">

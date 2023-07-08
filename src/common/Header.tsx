@@ -121,19 +121,15 @@ export default function Header() {
     setSelectedItem(itemKey);
     switch (itemKey) {
       case "Profile":
-        console.log("profile");
         router.push("/user-profile");
         break;
       case "Settings":
-        console.log("settings");
         break;
 
       case "AddFood":
-        console.log("add food");
         router.push("/restaurant/add-food");
         break;
       case "AddRestaurant":
-        console.log("add restaurant");
         router.push("/restaurant/register");
         break;
 

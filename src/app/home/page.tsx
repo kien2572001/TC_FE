@@ -28,7 +28,6 @@ const Home = (props: Props) => {
         const response = await homeApi.searchByKeyword(keyword);
         setRestaurants(response.restaurant);
         setFoods(response.food);
-        console.log(response)
       } catch (error) {
         console.error("Failed to fetch restaurants:", error);
       }
@@ -42,7 +41,6 @@ const Home = (props: Props) => {
           const response = await homeApi.getRestaurantsAll();
           setRestaurants(response.restaurants)
           restaurantRef.current = response.restaurants;
-          console.log(restaurantRef.current);
         } catch (error) {
           console.error("Failed to fetch restaurants:", error);
         }
@@ -54,7 +52,6 @@ const Home = (props: Props) => {
           const response = await homeApi.getFoodAll();
           setFoods(response.foods);
           foodRef.current = response.foods;
-          console.log(response)
         } catch (error) {
           console.error("Failed to fetch foods:", error);
         }
