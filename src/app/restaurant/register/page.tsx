@@ -62,7 +62,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
   const handleCreateRestaurant = async () => {
     try {
       await form.validateFields();
-      const res = await axios.post("http://13.212.172.169:3008/api/restaurants", {
+      const res = await axios.post("https://tastingcuisine.kien2572001.tech/api/restaurants", {
         name: restaurantName,
         address: restaurantAddress,
         activeTime: fromTime?.format("HH:mm") + "-" + toTime?.format("HH:mm"),

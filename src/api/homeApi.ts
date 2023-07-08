@@ -5,7 +5,7 @@ const homeApi = {
   getRestaurantsAll: async (): Promise<{ restaurants: Restaurant[] }> => {
     try {
       const res = await axios.get(
-        `http://13.212.172.169:3008/api/restaurants/all`
+        `https://tastingcuisine.kien2572001.tech/api/restaurants/all`
       );
       return res.data;
     } catch (err) {
@@ -15,7 +15,7 @@ const homeApi = {
   getFoodAll: async (): Promise<{ foods: Food[] }> => {
     try {
       const response = await axios.get(
-        `http://13.212.172.169:3008/api/foods/all`
+        `https://tastingcuisine.kien2572001.tech/api/foods/all`
       );
       return response.data;
     } catch (error) {
@@ -27,7 +27,7 @@ const homeApi = {
   ): Promise<{ restaurant: Restaurant[]; food: Food[] }> => {
     try {
       const response = await axios.get(
-        `http://13.212.172.169:3008/api/search`,
+        `https://tastingcuisine.kien2572001.tech/api/search`,
         {
           params: {
             keyword: keyword,

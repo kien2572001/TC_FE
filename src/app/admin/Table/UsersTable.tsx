@@ -74,7 +74,7 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
   const acceptUser = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://13.212.172.169:3008/api/user/admin/update/" + id,
+        "https://tastingcuisine.kien2572001.tech/api/user/admin/update/" + id,
         {
           status: "ACTIVE",
         }
@@ -88,7 +88,7 @@ const UsersTable = ({ data, rerenderTable }: Props) => {
   const rejectUser = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://13.212.172.169:3008/api/user/admin/update/" + id,
+        "https://tastingcuisine.kien2572001.tech/api/user/admin/update/" + id,
         {
           status: "BLOCKED",
         }

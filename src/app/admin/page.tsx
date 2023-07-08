@@ -60,7 +60,7 @@ const AdminPage = () => {
 
   const getRestaurants = async () => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/restaurants/admin/all"
+      "https://tastingcuisine.kien2572001.tech/api/restaurants/admin/all"
     );
     return res.data.restaurants.map((restaurant: any) => ({
       key: restaurant.id,
@@ -73,7 +73,7 @@ const AdminPage = () => {
 
   const getFoods = async () => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/foods/admin/all"
+      "https://tastingcuisine.kien2572001.tech/api/foods/admin/all"
     );
     return res.data.foods.map((food: any) => ({
       key: food.id,
@@ -88,7 +88,7 @@ const AdminPage = () => {
 
   const getUsers = async () => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/user/admin/all"
+      "https://tastingcuisine.kien2572001.tech/api/user/admin/all"
     );
     return res.data.users.map((user: any) => ({
       key: user.id,
@@ -128,7 +128,7 @@ const AdminPage = () => {
 
   const searchRestaurant = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/restaurants/admin/search",
+      "https://tastingcuisine.kien2572001.tech/api/restaurants/admin/search",
       {
         params: {
           name: value,
@@ -146,7 +146,7 @@ const AdminPage = () => {
 
   const searchFood = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/foods/admin/search",
+      "https://tastingcuisine.kien2572001.tech/api/foods/admin/search",
       {
         params: {
           name: value,
@@ -166,7 +166,7 @@ const AdminPage = () => {
 
   const searchUser = async (value: string) => {
     const res = await axiosJWT.get(
-      "http://13.212.172.169:3008/api/user/admin/search",
+      "https://tastingcuisine.kien2572001.tech/api/user/admin/search",
       {
         params: {
           name: value,

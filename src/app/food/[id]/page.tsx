@@ -19,7 +19,7 @@ const FoodDetail = () => {
   const fetchFoodReviews = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://13.212.172.169:3008/api/foods/detail/reviews/" + id
+        "https://tastingcuisine.kien2572001.tech/api/foods/detail/reviews/" + id
       );
       setReviews(response.data.reviews);
     } catch (error) {
@@ -30,7 +30,7 @@ const FoodDetail = () => {
   const fetchFoodDetail = async (id: number) => {
     try {
       const response = await axios.get(
-        "http://13.212.172.169:3008/api/foods/detail/" + id
+        "https://tastingcuisine.kien2572001.tech/api/foods/detail/" + id
       );
       setFood(response.data.food);
     } catch (error) {

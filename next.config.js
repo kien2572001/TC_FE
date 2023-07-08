@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "http://13.212.172.169:3008", // Proxy to Backend
+        destination: "https://tastingcuisine.kien2572001.tech/", // Proxy to Backend
       },
     ];
   },

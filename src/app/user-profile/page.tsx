@@ -47,7 +47,7 @@ const UserProfile: React.FC<Props> = () => {
         };
 
         const response = await axios.get(
-          "http://13.212.172.169:3008/api/user/profile",
+          "https://tastingcuisine.kien2572001.tech/api/user/profile",
           { headers }
         );
         const userData = response.data.user;
@@ -106,7 +106,7 @@ const UserProfile: React.FC<Props> = () => {
     const fetchAvatarUrl = async () => {
       try {
         const uploadResponse = await axios.post(
-          "http://13.212.172.169:3008/api/upload-cloudinary/image",
+          "https://tastingcuisine.kien2572001.tech/api/upload-cloudinary/image",
           formData // Passing the file directly, not the entire formData
         );
 
@@ -138,7 +138,7 @@ const UserProfile: React.FC<Props> = () => {
         formDataObject[key] = value;
       }
       const response = await axios.put(
-        "http://13.212.172.169:3008/api/user/update",
+        "https://tastingcuisine.kien2572001.tech/api/user/update",
         formDataObject,
         { headers }
       );

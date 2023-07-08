@@ -63,7 +63,7 @@ const UploadImage: React.FC<Props> = ({ image, setImage }) => {
     const data = new FormData();
     data.append("file", file);
     const res = await fetch(
-      "http://13.212.172.169:3008/api/upload-cloudinary/image",
+      "https://tastingcuisine.kien2572001.tech/api/upload-cloudinary/image",
       {
         method: "POST",
         body: data,

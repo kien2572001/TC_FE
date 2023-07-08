@@ -44,7 +44,7 @@ const AddFoodPage: React.FC<Props> = () => {
   const fetchRestaurantList = async () => {
     try {
       const response = await axios.get(
-        "http://13.212.172.169:3008/api/restaurants/all"
+        "https://tastingcuisine.kien2572001.tech/api/restaurants/all"
       );
       const restaurantList = response?.data?.restaurants?.map(
         (restaurant: any) => ({
@@ -89,7 +89,7 @@ const AddFoodPage: React.FC<Props> = () => {
   const handleCreateFood = async () => {
     try {
       await form.validateFields();
-      const response = await axios.post("http://13.212.172.169:3008/api/foods/", {
+      const response = await axios.post("https://tastingcuisine.kien2572001.tech/api/foods/", {
         name: foodName,
         price: Number.parseInt(foodPrice),
         restaurantId: restaurantId,

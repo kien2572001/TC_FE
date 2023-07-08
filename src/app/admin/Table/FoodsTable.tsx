@@ -77,7 +77,7 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const acceptFood = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://13.212.172.169:3008/api/foods/admin/update/" + id,
+        "https://tastingcuisine.kien2572001.tech/api/foods/admin/update/" + id,
         {
           status: "ACTIVE",
         }
@@ -91,7 +91,7 @@ const FoodsTable = ({ data, rerenderTable, navigateTo }: Props) => {
   const rejectFood = async (id: number) => {
     try {
       const res = await axiosJWT.put(
-        "http://13.212.172.169:3008/api/foods/admin/update/" + id,
+        "https://tastingcuisine.kien2572001.tech/api/foods/admin/update/" + id,
         {
           status: "BLOCKED",
         }
