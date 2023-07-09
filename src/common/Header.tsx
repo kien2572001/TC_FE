@@ -10,6 +10,8 @@ import { setFilterValue } from "@/features/slices/filterSlice";
 import { DropdownProps, Input, Space } from "antd";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import Image from "next/image";
+
 
 const { Search } = Input;
 
@@ -147,22 +149,23 @@ export default function Header() {
     }
   };
 
+
   return (
-    <div className="flex flex-row space-x-3">
+    <div className="flex flex-row space-x-3" style={{maxHeight: "90px"}}>
       {pathName !== "/login" && (
         <div className="p-[10px] w-full flex flex-row m-auto justify-between">
-          <div className="" style={{ padding: "15px" }}>
+          <div className="h-full inline-block" style={{marginLeft:"20px"}} >
             <Link
               href="/home"
-              className="m-auto text-black"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", lineHeight: "0", display: "inline-block" }}
             >
-              <span
-                className="leading-none text-[30px] text-[#333] "
-                style={{ fontSize: "30px", color: "#333" }}
-              >
-                TC
-              </span>
+              <Image
+                src="/images/logo2.png"
+                alt="logo"
+                width={45}
+                height={50}
+                
+              />
             </Link>
           </div>
           <div>
