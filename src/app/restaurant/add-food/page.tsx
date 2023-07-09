@@ -227,7 +227,12 @@ const AddFoodPage: React.FC<Props> = () => {
             <UploadImage image={image} setImage={setImage} />
           </Form.Item>
           <Form.Item className="flex justify-center">
-            <Button type="primary" htmlType="submit" onClick={handleCreateFood}>
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              onClick={handleCreateFood}
+              className="bg-red-600"  
+            >
               リクエスト
             </Button>
           </Form.Item>
