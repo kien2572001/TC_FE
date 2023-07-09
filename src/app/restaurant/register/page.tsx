@@ -198,6 +198,7 @@ const RestaurantRegisterPage: React.FC<Props> = () => {
               type="primary"
               htmlType="submit"
               onClick={handleCreateRestaurant}
+              className="bg-red-600"
             >
               リクエスト
             </Button>
