@@ -128,11 +128,10 @@ const UserProfile: React.FC<Props> = () => {
       };
       formData.delete("file");
       //@ts-ignore
-      // for (const [key, value] of formData.entries()) {
-      //   console.log(`${key}:`, value);
-      //   //@ts-ignore
-      //   formDataObject[key] = value;
-      // }
+      for (const [key, value] of formData.entries()) {
+        //@ts-ignore
+        formDataObject[key] = value;
+      }
       const response = await axios.put(
         "https://tastingcuisine.kien2572001.tech/api/user/update",
         formDataObject,
