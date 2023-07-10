@@ -163,13 +163,15 @@ export default function Header() {
               href="/home"
               style={{ textDecoration: "none", lineHeight: "0", display: "inline-block" }}
             >
-              <Image
-                src="/images/logo2.png"
-                alt="logo"
-                width={45}
-                height={50}
-                
-              />
+              <picture>
+                <source srcSet="/images/logo2.png" type="image/webp" />
+                <source srcSet="/images/logo2.png" type="image/png" />
+                <img
+                  src="/images/logo2.png"
+                  alt="logo"
+                  style={{ width: "45px", height: "auto" }}
+                />
+              </picture>
             </Link>
           </div>
           <div>
@@ -179,7 +181,7 @@ export default function Header() {
               onSearch={onSearch}
               onChange={onChange}
               className="m-auto"
-              style={{ minWidth: 300, paddingTop: "15px", width: "100%" }}
+              style={{ minWidth: 300, paddingTop: "10px", width: "100%" }}
             />
           </div>
           <div className="mr-[30px]">
