@@ -30,7 +30,15 @@ const Register = (props: Props) => {
     <div className="flex justify-center items-center h-screen">
       {contextHolder}
       <div className="bg-white shadow-xl p-12 flex items-center flex-col">
-        <h3>TC</h3>
+        <picture>
+          <source srcSet="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk" type="image/webp" />
+          <source srcSet="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk" type="image/png" />
+          <img
+            src="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk"
+            alt="logo"
+            style={{ width: "70px", height: "auto", paddingBottom: "20px" }}
+          />
+        </picture>
         <Form
           className="w-96"
           name="basic"
