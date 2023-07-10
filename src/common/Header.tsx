@@ -164,10 +164,10 @@ export default function Header() {
               style={{ textDecoration: "none", lineHeight: "0", display: "inline-block" }}
             >
               <picture>
-                <source srcSet="/images/logo2.png" type="image/webp" />
-                <source srcSet="/images/logo2.png" type="image/png" />
+                <source srcSet="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk" type="image/webp" />
+                <source srcSet="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk" type="image/png" />
                 <img
-                  src="/images/logo2.png"
+                  src="https://res.cloudinary.com/dm6vzyxzh/image/upload/v1688957507/mbuu43qw2pa3siwft1tw.png?fbclid=IwAR33SwRaiNcXFaunXZDvUr82UBaA5Hdho15HAViRtEW-f1NstGZDDEPjAnk"
                   alt="logo"
                   style={{ width: "45px", height: "auto" }}
                 />
