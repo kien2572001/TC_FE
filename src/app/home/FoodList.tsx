@@ -45,8 +45,10 @@ const FoodList = ({ foodsData }: { foodsData: any }) => {
                 className="w-full max-h-[133px] object-fill"
               />
             </div>
-            <h5 className="font-bold my-2 ">{food.name}</h5>
-            <h6 className="font-bold my-2 opacity-70">{food.restaurant}</h6>
+            <h5 className="font-bold my-2 ">{`${food.name}`}</h5>
+            <h6 className="font-bold my-2 opacity-70">{`${
+              (food.restaurant as any)?.name
+            }`}</h6>
             <p className="text-[#FF7918] font-bold text-base mt-2 leading-none">
               {food.price}VND
             </p>
