@@ -25,10 +25,14 @@ const Menu = ({ menu, handleRouterToFoodDetail }: MenuProps) => {
           <div className="absolute top-5 left-5 bg-[#FF903F] text-white font-bold text-xs p-2 rounded z-20">
             <StarFilled /> {Number.parseFloat(item.rating).toFixed(1)}
           </div>
-          <div className="p-[10px] h-[270px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
+          <div className="p-[10px] h-[230px] max-w-[200px] text-gray-700 transition-shadow duration-300 shadow-sm bg-white relative mx-auto  overflow-hidden  w-full cursor-pointer rounded-md border border-orange-200 border-solid">
             {/* Nội dung */}
-            <div className="h-[170px] w-full overflow-hidden">
-              <img src={item.photoUrl} alt="food" className="w-full h-fit" />
+            <div className="max-h-[170px] w-full overflow-hidden ">
+              <img
+                src={item.photoUrl}
+                alt="food"
+                className="w-full max-h-[133px] object-fill"
+              />
             </div>
             <h5 className="font-bold my-2 ">{item.name}</h5>
             <p className="text-[#FF7918] font-bold text-base mt-2">

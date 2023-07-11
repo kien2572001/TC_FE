@@ -3,6 +3,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { Rate, Empty } from "antd";
 import { usePathname, useRouter } from "next/navigation";
+import ReviewModal from "@/common/ReviewModal";
 import Menu from "./Menu";
 
 const RestaurantDetail = () => {
@@ -59,6 +60,14 @@ const RestaurantDetail = () => {
     router.push("/food/" + id);
   };
 
+  const updateComment = (comment: any) => {
+    let newReviews = [...reviews, comment];
+    newReviews = newReviews.sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+    setReviews(newReviews);
+  };
+
   return (
     <div className="w-full flex justify-center ">
       <div className="flex flex-col mt-24 shadow-2xl p-5 rounded-lg scale-[1.4] translate-y-[200px] mb-[450px] max-w-[980px]">
@@ -75,7 +84,9 @@ const RestaurantDetail = () => {
           {/* Res info block */}
           <div className="p-5 bg-[#fd7e14] text-white text-xl h-[210px] rounded-r">
             <div className="flex flex-col">
-              <h1 className="text-3xl truncate text-ellipsis">{restaurant?.name}</h1>
+              <h1 className="text-3xl truncate text-ellipsis">
+                {restaurant?.name}
+              </h1>
               <span className="mt-5">
                 <Rate disabled allowHalf value={restaurant?.rating} />
                 {restaurant?.rating ? (
@@ -102,12 +113,27 @@ const RestaurantDetail = () => {
         {/* Res menu block */}
         <div className="mt-5">
           <div className="font-bold text-2xl">メニュー</div>
-          <Menu menu={menu} handleRouterToFoodDetail={handleRouterToFoodDetail} />
+          <Menu
+            menu={menu}
+            handleRouterToFoodDetail={handleRouterToFoodDetail}
+          />
         </div>
 
         {/* Res review block */}
         <div className="mt-5">
-          <div className="font-bold text-2xl">レビュー</div>
+          <div className="font-bold text-2xl flex justify-between">
+            <div>
+              <span>レビュー</span>
+            </div>
+            <div>
+              <ReviewModal
+                name={restaurant?.name}
+                id={restaurant?.id}
+                type="restaurant"
+                updateComment={updateComment}
+              />
+            </div>
+          </div>
           <div className="flex  flex-col p-4">
             {reviews?.map((item) => (
               <div
